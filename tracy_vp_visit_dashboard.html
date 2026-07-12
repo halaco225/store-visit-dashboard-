@@ -1,0 +1,3151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tracy VP Visit — July 14–17, 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@600;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --red: #CC0000; --red-dark: #990000; --red-light: #FF4444;
+    --gold: #F5B800; --gold-dark: #C89300;
+    --green: #22C55E; --yellow: #F59E0B; --orange: #F97316;
+    --blue: #3B82F6;
+    --bg: #0A0A0A; --surface: #141414; --surface2: #1E1E1E; --surface3: #2A2A2A;
+    --border: #2E2E2E; --text: #F0F0F0; --text-muted: #888; --text-dim: #555;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: 'Barlow', sans-serif; min-height: 100vh; overflow-x: hidden; }
+  .header { background: var(--surface); border-bottom: 3px solid var(--red); padding: 14px 24px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; box-shadow: 0 4px 24px rgba(0,0,0,.5); flex-wrap: wrap; gap: 8px; }
+  .header-left { display: flex; align-items: center; gap: 14px; }
+  .logo-mark { width: 42px; height: 42px; background: var(--red); display: flex; align-items: center; justify-content: center; font-family: 'Barlow Condensed'; font-weight: 900; font-size: 20px; color: #fff; clip-path: polygon(0 0,100% 0,100% 75%,50% 100%,0 75%); flex-shrink: 0; }
+  .header-title { font-family: 'Barlow Condensed'; font-weight: 900; font-size: 22px; letter-spacing: .05em; text-transform: uppercase; line-height: 1; }
+  .header-sub { font-size: 11px; color: var(--text-muted); letter-spacing: .08em; text-transform: uppercase; margin-top: 3px; }
+  .tabs { display: flex; gap: 6px; padding: 12px 24px 0; background: var(--bg); flex-wrap: wrap; }
+  .tab { background: var(--surface2); border: 1px solid var(--border); color: var(--text-muted); padding: 9px 20px; font-family: 'Barlow Condensed'; font-weight: 700; font-size: 15px; letter-spacing: .07em; text-transform: uppercase; cursor: pointer; }
+  .tab.active { background: var(--red); color: #fff; border-color: var(--red); }
+  .tab .cnt { font-size: 11px; opacity: .75; margin-left: 6px; }
+  .wrap { padding: 18px 24px 60px; max-width: 1500px; margin: 0 auto; }
+  .kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px,1fr)); gap: 10px; margin-bottom: 18px; }
+  .kpi { background: var(--surface); border: 1px solid var(--border); padding: 14px 16px; }
+  .kpi .v { font-family: 'Barlow Condensed'; font-weight: 900; font-size: 30px; line-height: 1; }
+  .kpi .l { font-size: 10px; color: var(--text-muted); text-transform: uppercase; letter-spacing: .1em; margin-top: 5px; }
+  .panel { background: var(--surface); border: 1px solid var(--border); margin-bottom: 16px; }
+  .panel-h { padding: 10px 16px; border-bottom: 1px solid var(--border); font-family: 'Barlow Condensed'; font-weight: 700; font-size: 15px; letter-spacing: .08em; text-transform: uppercase; color: var(--gold); display: flex; justify-content: space-between; align-items: center; }
+  .panel-b { padding: 14px 16px; }
+  table.roster { width: 100%; border-collapse: collapse; font-size: 13px; }
+  table.roster th { text-align: left; font-size: 10px; text-transform: uppercase; letter-spacing: .08em; color: var(--text-muted); padding: 8px 10px; border-bottom: 1px solid var(--border); white-space: nowrap; }
+  table.roster td { padding: 9px 10px; border-bottom: 1px solid var(--surface2); white-space: nowrap; }
+  table.roster tr.srow { cursor: pointer; }
+  table.roster tr.srow:hover { background: var(--surface2); }
+  table.roster tr.dayhdr td { background: var(--surface2); color: var(--gold); font-family: 'Barlow Condensed'; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; font-size: 13px; padding: 6px 10px; }
+  .pill { display: inline-block; padding: 2px 9px; font-size: 11px; font-weight: 700; border-radius: 2px; letter-spacing: .03em; }
+  .pill.g { background: rgba(34,197,94,.15); color: var(--green); }
+  .pill.y { background: rgba(245,158,11,.15); color: var(--yellow); }
+  .pill.o { background: rgba(249,115,22,.18); color: var(--orange); }
+  .pill.r { background: rgba(255,68,68,.15); color: var(--red-light); }
+  .pill.m { background: var(--surface3); color: var(--text-muted); }
+  .num { font-variant-numeric: tabular-nums; }
+  .g { color: var(--green); } .y { color: var(--yellow); } .o { color: var(--orange); } .r { color: var(--red-light); } .m { color: var(--text-muted); }
+  /* day view */
+  .leg { display: flex; align-items: center; gap: 10px; color: var(--text-muted); font-size: 12px; text-transform: uppercase; letter-spacing: .08em; padding: 10px 4px; }
+  .leg::before { content: ''; width: 26px; height: 1px; background: var(--text-dim); }
+  .scard { background: var(--surface); border: 1px solid var(--border); border-left: 3px solid var(--red); margin-bottom: 12px; padding: 14px 18px; cursor: pointer; display: grid; grid-template-columns: 110px 1.3fr 2fr auto; gap: 14px; align-items: center; }
+  .scard:hover { background: var(--surface2); }
+  .scard .time { font-family: 'Barlow Condensed'; font-weight: 700; font-size: 16px; color: var(--gold); }
+  .scard .nm { font-family: 'Barlow Condensed'; font-weight: 900; font-size: 21px; letter-spacing: .03em; }
+  .scard .addr { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+  .scard .mini { display: flex; gap: 18px; flex-wrap: wrap; }
+  .mini .mi .v { font-family: 'Barlow Condensed'; font-weight: 700; font-size: 18px; }
+  .mini .mi .l { font-size: 9px; text-transform: uppercase; letter-spacing: .09em; color: var(--text-muted); }
+  .go { color: var(--text-dim); font-size: 22px; }
+  /* detail overlay */
+  #detail { position: fixed; inset: 0; background: rgba(0,0,0,.82); z-index: 200; display: none; overflow-y: auto; }
+  #detail.open { display: block; }
+  .dwrap { max-width: 1250px; margin: 26px auto; background: var(--bg); border: 1px solid var(--border); }
+  .dhead { background: var(--surface); border-bottom: 3px solid var(--red); padding: 18px 24px; display: flex; justify-content: space-between; align-items: flex-start; position: sticky; top: 0; z-index: 10; }
+  .dhead h2 { font-family: 'Barlow Condensed'; font-weight: 900; font-size: 30px; letter-spacing: .03em; }
+  .dhead .sub { color: var(--text-muted); font-size: 13px; margin-top: 4px; }
+  .xbtn { background: var(--surface3); border: 1px solid var(--border); color: var(--text); font-size: 18px; width: 38px; height: 38px; cursor: pointer; }
+  .dgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; padding: 16px 20px 26px; }
+  .dgrid .full { grid-column: 1 / -1; }
+  @media (max-width: 900px) { .dgrid { grid-template-columns: 1fr; } .scard { grid-template-columns: 1fr; } }
+  .kv { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px,1fr)); gap: 12px; }
+  .kv .it .v { font-family: 'Barlow Condensed'; font-weight: 900; font-size: 24px; }
+  .kv .it .s { font-size: 11px; color: var(--text-muted); }
+  .kv .it .l { font-size: 9px; text-transform: uppercase; letter-spacing: .09em; color: var(--text-muted); margin-top: 3px; }
+  .bars { display: flex; align-items: flex-end; gap: 10px; height: 90px; margin-top: 8px; }
+  .bgroup { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px; height: 100%; justify-content: flex-end; }
+  .bar { width: 70%; min-height: 2px; }
+  .bgroup .bl { font-size: 9px; color: var(--text-muted); text-transform: uppercase; }
+  .bgroup .bv { font-size: 11px; font-weight: 600; }
+  .hbar { height: 10px; background: var(--surface3); display: flex; overflow: hidden; margin: 6px 0 4px; }
+  .hbar div { height: 100%; }
+  .dev { padding: 7px 0; border-bottom: 1px solid var(--surface2); font-size: 13px; display: flex; gap: 10px; }
+  .dev .code { color: var(--gold); font-weight: 700; white-space: nowrap; }
+  .dev .rep { color: var(--red-light); font-weight: 700; font-size: 10px; text-transform: uppercase; white-space: nowrap; align-self: center;}
+  .cmt { padding: 10px 0; border-bottom: 1px solid var(--surface2); }
+  .cmt .meta { display: flex; gap: 8px; align-items: center; font-size: 11px; color: var(--text-muted); margin-bottom: 4px; }
+  .cmt .txt { font-size: 13px; line-height: 1.45; }
+  .stars { color: var(--gold); letter-spacing: 1px; font-size: 11px; }
+  .nodata { color: var(--text-muted); font-size: 13px; padding: 8px 0; }
+  .spark { display: flex; align-items: flex-end; gap: 3px; height: 34px; }
+  .spark div { width: 14px; background: var(--surface3); position: relative; }
+  .spark div span { position: absolute; top: -14px; left: 50%; transform: translateX(-50%); font-size: 9px; color: var(--text-muted); }
+  .footnote { color: var(--text-dim); font-size: 11px; padding: 4px 24px 30px; max-width: 1500px; margin: 0 auto; }
+</style>
+</head>
+<body>
+<div class="header">
+  <div class="header-left">
+    <div class="logo-mark">PH</div>
+    <div>
+      <div class="header-title">Tracy VP Field Visit</div>
+      <div class="header-sub">July 14–17 2026 · 13 Stores · ATL Metro &amp; FL Panhandle · RDO: Harold Lacoste</div>
+    </div>
+  </div>
+  <div class="header-sub" id="buildStamp"></div>
+</div>
+<div class="tabs" id="tabs"></div>
+<div class="wrap" id="view"></div>
+<div class="footnote">Sources: P6-26 Final P&amp;L · Weekly Trending P7W3 · SMG (comments 4/13–7/11) · HutBot routines · Steritech FSCC · CORE evaluations · Master Alignment P7 REV 07/09. FSCC/CORE for GA stores pending except Ellenwood (FSCC 6/24). Prepared for internal use.</div>
+<div id="detail"><div class="dwrap" id="dcontent"></div></div>
+
+<script>
+const DATA = {
+ "39376": {
+  "itin": {
+   "day": "Tue Jul 14",
+   "order": 1,
+   "time": "10:00–11:30 AM",
+   "label": "CrossRds"
+  },
+  "info": {
+   "name": "CrossRds",
+   "subconcept": "DELCO",
+   "address": "8876 Dallas-Acworth Hwy #106",
+   "city": "Dallas",
+   "state": "GA",
+   "zip": "30132",
+   "phone": "6788462020",
+   "gm": "Shannel Norville",
+   "gmPhone": "9432623757"
+  },
+  "pl": {
+   "netSales": {
+    "p03": 39160.0,
+    "p04": 35571.0,
+    "p05": 37458.0,
+    "p06": 56463.0,
+    "p06pct": 1.0,
+    "p06ly": 41857.0,
+    "ytd": 247789.0,
+    "ytdly": 242384.0
+   },
+   "totalRevenue": {
+    "p03": 41991.0,
+    "p04": 38169.0,
+    "p05": 39955.0,
+    "p06": 60198.0,
+    "p06pct": 1.0661,
+    "p06ly": 44730.0,
+    "ytd": 265167.0,
+    "ytdly": 260221.0
+   },
+   "cos": {
+    "p03": 12719.0,
+    "p04": 7937.0,
+    "p05": 12178.0,
+    "p06": 18589.0,
+    "p06pct": 0.3292,
+    "p06ly": 12095.0,
+    "ytd": 71986.0,
+    "ytdly": 68440.0
+   },
+   "laborTotal": {
+    "p03": 17148.0,
+    "p04": 16053.0,
+    "p05": 14266.0,
+    "p06": 17268.0,
+    "p06pct": 0.3058,
+    "p06ly": 16412.0,
+    "ytd": 97979.0,
+    "ytdly": 96800.0
+   },
+   "controllableProfit": {
+    "p03": 2978.0,
+    "p04": 6263.0,
+    "p05": 4868.0,
+    "p06": 12149.0,
+    "p06pct": 0.2152,
+    "p06ly": 7893.0,
+    "ytd": 38281.0,
+    "ytdly": 44106.0
+   },
+   "ebitda": {
+    "p03": -4686.0,
+    "p04": -1247.0,
+    "p05": -1686.0,
+    "p06": 2788.0,
+    "p06pct": 0.04940000000000001,
+    "p06ly": -984.0,
+    "ytd": -7819.0,
+    "ytdly": -6205.0
+   }
+  },
+  "trend": {
+   "flag": "Caution",
+   "dm": "Jadon McNeil",
+   "weeks": [
+    "P06WK4",
+    "P07WK1",
+    "P07WK2",
+    "P07WK3"
+   ],
+   "salesGrowth": [
+    0.3783,
+    0.3731,
+    0.4319,
+    0.2894
+   ],
+   "txnGrowth": [
+    0.3886,
+    0.3622,
+    0.4784,
+    0.4747
+   ]
+  },
+  "smgWeek": {
+   "win": 45.5,
+   "count": 44
+  },
+  "smgPtd": {
+   "win": 45.5,
+   "count": 17
+  },
+  "cdr": {
+   "avgOtd": 23.111,
+   "otdU18": 0.244,
+   "del30": 0.363,
+   "del45": 0.148,
+   "promise": 0.747
+  },
+  "scorecard": {
+   "salesGrowth": null,
+   "salesScore": null,
+   "otd": 24.9379,
+   "otdScore": 1.0,
+   "win": 0.4697,
+   "winScore": 3.0,
+   "profitGrowth": null,
+   "profitScore": null,
+   "retention": 0.6154,
+   "retentionScore": 1.0
+  },
+  "hutbot": {
+   "onTime": 88.1,
+   "late": 1.0,
+   "missed": 10.9
+  },
+  "gmRoutine": {
+   "onTime": 89.5,
+   "late": 0.8,
+   "missed": 9.7
+  },
+  "comments": [
+   {
+    "date": "Jul 10",
+    "source": "Social",
+    "rating": 1,
+    "osat": null,
+    "text": "Order was 1 hour and 23 mins late from initial time of arrival . I called location and representative knew me by first name when I stated I have a order that was supposed to have arrived at 4:23 she then told me that she remade my order because it had been sitting for 20 minutes "
+   },
+   {
+    "date": "Jul 10",
+    "source": "GES",
+    "rating": null,
+    "osat": 2,
+    "text": "I order a large beef pizza with banana peppers. However when I received the pizza banana peppers were only on half of the pizza not the entire pizza as I requested."
+   },
+   {
+    "date": "Jul 09",
+    "source": "GES",
+    "rating": null,
+    "osat": 5,
+    "text": "This Pizza Hut does an exceptional job  with  making  delicious food and providing great customer service.  Devante and all are the best!"
+   },
+   {
+    "date": "Jul 05",
+    "source": "Social",
+    "rating": 2,
+    "osat": null,
+    "text": "Food is thrown together most of the time. Below are ‘saucy’ sweet chili wings. Barely any sauce even at the bottom. It’s been times when the cheese stick aren’t cut and at least two of sticks are just bread or with a sprinkle of cheese."
+   },
+   {
+    "date": "Jul 05",
+    "source": "GES",
+    "rating": null,
+    "osat": 2,
+    "text": "Very undercooked. Recieved raw dough in the pizza. The over all pizza lacked flavor. Unsafe to consume the rest of the pizza."
+   },
+   {
+    "date": "Jul 03",
+    "source": "GES",
+    "rating": null,
+    "osat": 5,
+    "text": "We love the Book it Program! \r\nAnd please open up sit down Pizza Huts with juke boxes again.  We will continue supporting"
+   },
+   {
+    "date": "Jun 30",
+    "source": "GES",
+    "rating": null,
+    "osat": 2,
+    "text": "Upon entering the store for pickup I was completely ignored for 15 minutes while employees were talking on personal phones. Hands were barely washed in between talking on personal cell phones and handling the food. Finally, they packaged up my food 10-15 min after it’s been cooke"
+   },
+   {
+    "date": "Jun 30",
+    "source": "GES",
+    "rating": null,
+    "osat": 3,
+    "text": "Completely sent me the wrong drink, the pizza did not have enough sauce on it and my chicken wings were extremely greasy.  I also ordered cheese sticks and got regular breadsticks.  I wish someone would have read my order to see that we got multiple wrong items."
+   }
+  ],
+  "commentCount": 52
+ },
+ "39389": {
+  "itin": {
+   "day": "Tue Jul 14",
+   "order": 2,
+   "time": "11:45 AM–1:15 PM",
+   "label": "Lithia Springs"
+  },
+  "info": {
+   "name": "Lithia Springs",
+   "subconcept": "DELCO",
+   "address": "6951 S Sweetwater Rd",
+   "city": "Lithia Springs",
+   "state": "GA",
+   "zip": "30122",
+   "phone": "6788315008",
+   "gm": "Karla Moore",
+   "gmPhone": "6623154205"
+  },
+  "pl": {
+   "netSales": {
+    "p03": 98983.0,
+    "p04": 93551.0,
+    "p05": 93573.0,
+    "p06": 102725.0,
+    "p06pct": 1.0,
+    "p06ly": 89259.0,
+    "ytd": 561543.0,
+    "ytdly": 544380.0
+   },
+   "totalRevenue": {
+    "p03": 104432.0,
+    "p04": 99089.0,
+    "p05": 98958.0,
+    "p06": 108433.0,
+    "p06pct": 1.0556,
+    "p06ly": 94512.0,
+    "ytd": 593807.0,
+    "ytdly": 576009.0
+   },
+   "cos": {
+    "p03": 26719.0,
+    "p04": 25379.0,
+    "p05": 26214.0,
+    "p06": 27804.0,
+    "p06pct": 0.2707,
+    "p06ly": 23646.0,
+    "ytd": 151393.0,
+    "ytdly": 145393.0
+   },
+   "laborTotal": {
+    "p03": 25803.0,
+    "p04": 25374.0,
+    "p05": 26745.0,
+    "p06": 28008.0,
+    "p06pct": 0.2726,
+    "p06ly": 24153.0,
+    "ytd": 156472.0,
+    "ytdly": 155949.0
+   },
+   "controllableProfit": {
+    "p03": 35568.0,
+    "p04": 34199.0,
+    "p05": 31147.0,
+    "p06": 35225.0,
+    "p06pct": 0.3429,
+    "p06ly": 32498.0,
+    "ytd": 189213.0,
+    "ytdly": 182045.0
+   },
+   "ebitda": {
+    "p03": 22129.0,
+    "p04": 20164.0,
+    "p05": 16904.0,
+    "p06": 20056.0,
+    "p06pct": 0.1952,
+    "p06ly": 18516.0,
+    "ytd": 105887.0,
+    "ytdly": 98729.0
+   }
+  },
+  "trend": {
+   "flag": null,
+   "dm": "Jorge Garcia",
+   "weeks": [
+    "P06WK4",
+    "P07WK1",
+    "P07WK2",
+    "P07WK3"
+   ],
+   "salesGrowth": [
+    0.2869,
+    0.0847,
+    0.066,
+    0.1394
+   ],
+   "txnGrowth": [
+    0.3291,
+    0.1455,
+    0.0825,
+    0.134
+   ]
+  },
+  "smgWeek": {
+   "win": 51.9,
+   "count": 52
+  },
+  "smgPtd": {
+   "win": 51.9,
+   "count": 17
+  },
+  "cdr": {
+   "avgOtd": 18.324,
+   "otdU18": 0.557,
+   "del30": 0.554,
+   "del45": 0.066,
+   "promise": 0.784
+  },
+  "scorecard": {
+   "salesGrowth": 0.1509,
+   "salesScore": 5.0,
+   "otd": 18.8327,
+   "otdScore": 3.0,
+   "win": 0.5785,
+   "winScore": 3.0,
+   "profitGrowth": 1550.19,
+   "profitScore": 4.0,
+   "retention": 0.875,
+   "retentionScore": 4.0
+  },
+  "hutbot": {
+   "onTime": 95.5,
+   "late": 2.7,
+   "missed": 1.8
+  },
+  "gmRoutine": {
+   "onTime": 93.3,
+   "late": 4.2,
+   "missed": 2.5
+  },
+  "comments": [
+   {
+    "date": "Jul 09",
+    "source": "GES",
+    "rating": null,
+    "osat": 3,
+    "text": "Wings were ok  .alit of cheese maybe a handful of toppings all together"
+   },
+   {
+    "date": "Jul 05",
+    "source": "GES",
+    "rating": null,
+    "osat": 1,
+    "text": "I ordered the 6 fried apple pies I got 5 with on that looked like it was biten into Nt happy"
+   },
+   {
+    "date": "Jul 04",
+    "source": "GES",
+    "rating": null,
+    "osat": 4,
+    "text": "I ordered garlic parmasean wings and there was not enough sauce. They were dry"
+   },
+   {
+    "date": "Jun 28",
+    "source": "Social",
+    "rating": 5,
+    "osat": null,
+    "text": "Nice and friendly staff.!! 🙂 This is hands down one of the best locations in Georgia.!! ❤️"
+   },
+   {
+    "date": "Jun 28",
+    "source": "GES",
+    "rating": null,
+    "osat": 4,
+    "text": "man who gave me the order was genually friendly , last few orders it been him and he is very pleasant and does his job with pleasure"
+   },
+   {
+    "date": "Jun 21",
+    "source": "GES",
+    "rating": null,
+    "osat": 1,
+    "text": "I ordered online and it reset my order which took away my toppings and gave me a plain cheese pizza.  Do not like cheese pizza only."
+   },
+   {
+    "date": "Jun 19",
+    "source": "GES",
+    "rating": null,
+    "osat": 2,
+    "text": "That pizza was cold and horrible tasting. They forgot the black olives and onions I ordered on the second pizza, I was very dissatisfied."
+   },
+   {
+    "date": "Jun 18",
+    "source": "Social",
+    "rating": 1,
+    "osat": null,
+    "text": "I did not get his name however the heavyset Caucasian manager is not very friendly or personable. I order through the Pizza Hut app a 3 topping large pizza and every time it’s made on his watch it’s always a bad experience. I ordered garlic Parmesan sauce, chicken, bacon and onio"
+   }
+  ],
+  "commentCount": 59
+ },
+ "39381": {
+  "itin": {
+   "day": "Tue Jul 14",
+   "order": 3,
+   "time": "1:30–3:00 PM",
+   "label": "Fairburn Rd"
+  },
+  "info": {
+   "name": "Fairburn Rd",
+   "subconcept": "RBD",
+   "address": "5636 Fairburn Rd",
+   "city": "Douglasville",
+   "state": "GA",
+   "zip": "30134",
+   "phone": "6788315011",
+   "gm": "Cheree Leddy",
+   "gmPhone": "4708910556"
+  },
+  "pl": {
+   "netSales": {
+    "p03": 86211.0,
+    "p04": 86244.0,
+    "p05": 87194.0,
+    "p06": 92435.0,
+    "p06pct": 1.0,
+    "p06ly": 91943.0,
+    "ytd": 517004.0,
+    "ytdly": 530014.0
+   },
+   "totalRevenue": {
+    "p03": 90020.0,
+    "p04": 89989.0,
+    "p05": 91140.0,
+    "p06": 96768.0,
+    "p06pct": 1.0469,
+    "p06ly": 95847.0,
+    "ytd": 540454.0,
+    "ytdly": 551946.0
+   },
+   "cos": {
+    "p03": 23530.0,
+    "p04": 23673.0,
+    "p05": 24939.0,
+    "p06": 25851.0,
+    "p06pct": 0.2797,
+    "p06ly": 24500.0,
+    "ytd": 141234.0,
+    "ytdly": 143366.0
+   },
+   "laborTotal": {
+    "p03": 24696.0,
+    "p04": 24326.0,
+    "p05": 22418.0,
+    "p06": 26514.0,
+    "p06pct": 0.2868,
+    "p06ly": 26879.0,
+    "ytd": 148079.0,
+    "ytdly": 166605.0
+   },
+   "controllableProfit": {
+    "p03": 27436.0,
+    "p04": 28405.0,
+    "p05": 29810.0,
+    "p06": 31677.0,
+    "p06pct": 0.3427,
+    "p06ly": 29697.0,
+    "ytd": 166893.0,
+    "ytdly": 145744.0
+   },
+   "ebitda": {
+    "p03": 9163.0,
+    "p04": 9661.0,
+    "p05": 12571.0,
+    "p06": 12798.0,
+    "p06pct": 0.1385,
+    "p06ly": 9885.0,
+    "ytd": 58024.0,
+    "ytdly": 33464.0
+   }
+  },
+  "trend": {
+   "flag": null,
+   "dm": "Michelle Meehan",
+   "weeks": [
+    "P06WK4",
+    "P07WK1",
+    "P07WK2",
+    "P07WK3"
+   ],
+   "salesGrowth": [
+    0.0708,
+    0.074,
+    -0.0261,
+    0.07
+   ],
+   "txnGrowth": [
+    0.081,
+    0.1357,
+    0.0365,
+    0.1045
+   ]
+  },
+  "smgWeek": {
+   "win": 57.8,
+   "count": 45
+  },
+  "smgPtd": {
+   "win": 57.8,
+   "count": 16
+  },
+  "cdr": {
+   "avgOtd": 28.063,
+   "otdU18": 0.141,
+   "del30": 0.231,
+   "del45": 0.277,
+   "promise": 0.667
+  },
+  "scorecard": {
+   "salesGrowth": 0.0054,
+   "salesScore": 3.0,
+   "otd": 28.494,
+   "otdScore": 1.0,
+   "win": 0.4898,
+   "winScore": 3.0,
+   "profitGrowth": 2998.5,
+   "profitScore": 5.0,
+   "retention": 0.5,
+   "retentionScore": 1.0
+  },
+  "hutbot": {
+   "onTime": 98.3,
+   "late": 1.4,
+   "missed": 0.3
+  },
+  "gmRoutine": {
+   "onTime": 100.0,
+   "late": 0.0,
+   "missed": 0.0
+  },
+  "comments": [
+   {
+    "date": "Jul 08",
+    "source": "GES",
+    "rating": null,
+    "osat": 2,
+    "text": "I ordered the package with a meat lovers pizza, a specialty pizza, the boneless wings, and cheese bread strips. The meat lovers pizza was practically empty, it had one pepperoni on most slices, it looked like a cheese pizza with a little meat sprinkled here and there. The super s"
+   },
+   {
+    "date": "Jul 06",
+    "source": "GES",
+    "rating": null,
+    "osat": 2,
+    "text": "Order was wrong"
+   },
+   {
+    "date": "Jul 02",
+    "source": "GES",
+    "rating": null,
+    "osat": 2,
+    "text": "It would be nice if I got a refund for order not being right."
+   },
+   {
+    "date": "Jun 30",
+    "source": "Social",
+    "rating": 1,
+    "osat": null,
+    "text": "Placed an order HOURS AGO for pickup at a certain time. It’s not ready…. Why place an order ahead of time? I’m frustrated"
+   },
+   {
+    "date": "Jun 28",
+    "source": "GES",
+    "rating": null,
+    "osat": 1,
+    "text": "I ordered the  one topping stuffed crust pizza. The pizza looked dried up. Hardly no topping or cheese. Tasted tough and had no flavor. I just ate the stuff crust part."
+   },
+   {
+    "date": "Jun 28",
+    "source": "GES",
+    "rating": null,
+    "osat": 2,
+    "text": "I had minor issue finding the personal pan pizza section but I figured it out. I paid almost $30 for 3 personal pan pizza’s and they were burnt and did have the extra cheese that was paid."
+   },
+   {
+    "date": "Jun 23",
+    "source": "Doordash",
+    "rating": null,
+    "osat": null,
+    "text": "missing the wings"
+   },
+   {
+    "date": "Jun 22",
+    "source": "GES",
+    "rating": null,
+    "osat": 2,
+    "text": "When I grabbed the boxes of pizza the top box looked like something big was sitting on top of it. The box was indented in the middle. When I opened them I realized that he either dropped the pizzas or something fell on top of them during delivery. It was just cold smashed pizza. "
+   }
+  ],
+  "commentCount": 58
+ },
+ "39391": {
+  "itin": {
+   "day": "Tue Jul 14",
+   "order": 4,
+   "time": "3:15–4:15 PM",
+   "label": "Hwy 5"
+  },
+  "info": {
+   "name": "Hwy 5",
+   "subconcept": "DELCO",
+   "address": "3697 Hwy 5  Ste 4",
+   "city": "Douglasville",
+   "state": "GA",
+   "zip": "30135",
+   "phone": "6788315012",
+   "gm": "Stephen Payton",
+   "gmPhone": "2052604320"
+  },
+  "pl": {
+   "netSales": {
+    "p03": 73414.0,
+    "p04": 72207.0,
+    "p05": 70672.0,
+    "p06": 76213.0,
+    "p06pct": 1.0,
+    "p06ly": 76365.0,
+    "ytd": 437158.0,
+    "ytdly": 443410.0
+   },
+   "totalRevenue": {
+    "p03": 77366.0,
+    "p04": 76238.0,
+    "p05": 74560.0,
+    "p06": 80386.0,
+    "p06pct": 1.0548,
+    "p06ly": 80565.0,
+    "ytd": 460942.0,
+    "ytdly": 468310.0
+   },
+   "cos": {
+    "p03": 19693.0,
+    "p04": 19984.0,
+    "p05": 20107.0,
+    "p06": 20794.0,
+    "p06pct": 0.2728,
+    "p06ly": 19815.0,
+    "ytd": 117818.0,
+    "ytdly": 118422.0
+   },
+   "laborTotal": {
+    "p03": 19574.0,
+    "p04": 19746.0,
+    "p05": 18469.0,
+    "p06": 21651.0,
+    "p06pct": 0.2841,
+    "p06ly": 22304.0,
+    "ytd": 123698.0,
+    "ytdly": 135093.0
+   },
+   "controllableProfit": {
+    "p03": 27292.0,
+    "p04": 25194.0,
+    "p05": 24268.0,
+    "p06": 26491.0,
+    "p06pct": 0.3476,
+    "p06ly": 27881.0,
+    "ytd": 149533.0,
+    "ytdly": 148513.0
+   },
+   "ebitda": {
+    "p03": 15987.0,
+    "p04": 13766.0,
+    "p05": 13873.0,
+    "p06": 15172.0,
+    "p06pct": 0.1991,
+    "p06ly": 15701.0,
+    "ytd": 82568.0,
+    "ytdly": 78906.0
+   }
+  },
+  "trend": {
+   "flag": null,
+   "dm": "Michelle Meehan",
+   "weeks": [
+    "P06WK4",
+    "P07WK1",
+    "P07WK2",
+    "P07WK3"
+   ],
+   "salesGrowth": [
+    0.0733,
+    -0.062,
+    -0.1128,
+    0.0853
+   ],
+   "txnGrowth": [
+    0.1568,
+    -0.0276,
+    -0.0261,
+    0.1643
+   ]
+  },
+  "smgWeek": {
+   "win": 47.7,
+   "count": 44
+  },
+  "smgPtd": {
+   "win": 47.7,
+   "count": 17
+  },
+  "cdr": {
+   "avgOtd": 18.782,
+   "otdU18": 0.539,
+   "del30": 0.531,
+   "del45": 0.088,
+   "promise": 0.789
+  },
+  "scorecard": {
+   "salesGrowth": -0.002,
+   "salesScore": 2.0,
+   "otd": 17.8446,
+   "otdScore": 4.0,
+   "win": 0.5909,
+   "winScore": 4.0,
+   "profitGrowth": -518.74,
+   "profitScore": 2.0,
+   "retention": 0.3333,
+   "retentionScore": 1.0
+  },
+  "hutbot": {
+   "onTime": 96.2,
+   "late": 3.5,
+   "missed": 0.3
+  },
+  "comments": [
+   {
+    "date": "Jul 11",
+    "source": "Social",
+    "rating": 1,
+    "osat": null,
+    "text": "Ordered 2 pizzas for delivery. One pizza was totally wrong( pepperoni, ham), 2nd pizza was partially correct(Italian sausage, pepperoni). After speaking with 2 associates that night, a day or two later we received a call from the general manager(after we left a review). Got a 30 "
+   },
+   {
+    "date": "Jul 07",
+    "source": "GES",
+    "rating": null,
+    "osat": 5,
+    "text": "Our pizza was genuinely the most delicious pizza my family has had in what feels like forever!! Thank you guys so much!! Take care!!"
+   },
+   {
+    "date": "Jul 03",
+    "source": "GES",
+    "rating": null,
+    "osat": 2,
+    "text": "I Love PIZZA HUT pizzas!!! They are our favorite when done as requested or ordered. On this order, at first glance, the pizzas were pleasing to the eye. Until, you notice the red isn’t pepperonis, ITS WAY TOOOOOO MUCH SAUCE and you’ve ordered LIGHT SAUCE!!! It’s awful and with to"
+   },
+   {
+    "date": "Jul 03",
+    "source": "GES",
+    "rating": null,
+    "osat": 2,
+    "text": "The pizza was crumpled up in one corner of the box. The delivery person must have put the box on its side. Also, I asked for extra sauce and there was hardly any sauce at all. Some slices had none."
+   },
+   {
+    "date": "Jul 02",
+    "source": "GES",
+    "rating": null,
+    "osat": 3,
+    "text": "I usually log into Pizza Hut when I want a pizza. This time, the website had issues with a regular order I place on a 'regular' basis. After attempting this order ~3 times, it finally went through but the prices had risen quite a bit.The pizza had it usual taste but the dough was"
+   },
+   {
+    "date": "Jul 01",
+    "source": "GES",
+    "rating": null,
+    "osat": 2,
+    "text": "I ordered 2 personal pan pizza and cheese bread.  The bread didn't have cheese on the entire order only in the middle. Both pizza toppings were slid off. One of them they put the wrong sauce looks like they scraped it off and then put the correct sauce. The flavor was not good. I"
+   },
+   {
+    "date": "Jun 27",
+    "source": "Social",
+    "rating": 5,
+    "osat": null,
+    "text": "Great Pizza, great service, and great quality"
+   },
+   {
+    "date": "Jun 27",
+    "source": "Social",
+    "rating": 5,
+    "osat": null,
+    "text": "Great service!!! Kept me up to date when my pizza was ready. Highly recommend."
+   }
+  ],
+  "commentCount": 49
+ },
+ "39415": {
+  "itin": {
+   "day": "Wed Jul 15",
+   "order": 5,
+   "time": "11:00 AM–12:15 PM",
+   "label": "Miramar Beach"
+  },
+  "info": {
+   "name": "Miramar Beach",
+   "subconcept": "DELCO",
+   "address": "50 Holiday N Rd",
+   "city": "Miramar Beach",
+   "state": "FL",
+   "zip": "32550",
+   "phone": "8503785255",
+   "gm": "James Haberlin",
+   "gmPhone": "8503054215"
+  },
+  "pl": {
+   "netSales": {
+    "p03": 53723.0,
+    "p04": 67571.0,
+    "p05": 48052.0,
+    "p06": 109156.0,
+    "p06pct": 1.0,
+    "p06ly": 99947.0,
+    "ytd": 333765.0,
+    "ytdly": 313287.0
+   },
+   "totalRevenue": {
+    "p03": 55712.0,
+    "p04": 70148.0,
+    "p05": 50083.0,
+    "p06": 112980.0,
+    "p06pct": 1.035,
+    "p06ly": 104216.0,
+    "ytd": 346445.0,
+    "ytdly": 326829.0
+   },
+   "cos": {
+    "p03": 13358.0,
+    "p04": 17051.0,
+    "p05": 12081.0,
+    "p06": 25361.0,
+    "p06pct": 0.2323,
+    "p06ly": 23214.0,
+    "ytd": 81919.0,
+    "ytdly": 75393.0
+   },
+   "laborTotal": {
+    "p03": 18460.0,
+    "p04": 19997.0,
+    "p05": 19360.0,
+    "p06": 25696.0,
+    "p06pct": 0.2354,
+    "p06ly": 23903.0,
+    "ytd": 112202.0,
+    "ytdly": 117241.0
+   },
+   "controllableProfit": {
+    "p03": 16087.0,
+    "p04": 22688.0,
+    "p05": 9268.0,
+    "p06": 49727.0,
+    "p06pct": 0.4556,
+    "p06ly": 43955.0,
+    "ytd": 93069.0,
+    "ytdly": 78595.0
+   },
+   "ebitda": {
+    "p03": 5602.0,
+    "p04": 12241.0,
+    "p05": 793.0,
+    "p06": 33375.0,
+    "p06pct": 0.3058,
+    "p06ly": 28336.0,
+    "ytd": 35372.0,
+    "ytdly": 17090.0
+   }
+  },
+  "trend": {
+   "flag": null,
+   "dm": "Marc Gannon",
+   "weeks": [
+    "P06WK4",
+    "P07WK1",
+    "P07WK2",
+    "P07WK3"
+   ],
+   "salesGrowth": [
+    0.1646,
+    0.4011,
+    0.3487,
+    0.2955
+   ],
+   "txnGrowth": [
+    0.1398,
+    0.4111,
+    0.2958,
+    0.2857
+   ]
+  },
+  "smgWeek": {
+   "win": 71.2,
+   "count": 52
+  },
+  "smgPtd": {
+   "win": 71.2,
+   "count": 14
+  },
+  "cdr": {
+   "avgOtd": 34.684,
+   "otdU18": 0.07,
+   "del30": 0.134,
+   "del45": 0.524,
+   "promise": 0.421
+  },
+  "scorecard": {
+   "salesGrowth": 0.0921,
+   "salesScore": 5.0,
+   "otd": 28.39,
+   "otdScore": 1.0,
+   "win": 0.7059,
+   "winScore": 5.0,
+   "profitGrowth": 5049.45,
+   "profitScore": 5.0,
+   "retention": 0.5714,
+   "retentionScore": 1.0
+  },
+  "hutbot": {
+   "onTime": 89.0,
+   "late": 9.0,
+   "missed": 2.0
+  },
+  "gmRoutine": {
+   "onTime": 86.7,
+   "late": 11.1,
+   "missed": 2.2
+  },
+  "comments": [
+   {
+    "date": "Jul 11",
+    "source": "GES",
+    "rating": null,
+    "osat": 5,
+    "text": "Essentially, walked in, waited while no one was at the counter, said name, was handed pizza, I thanked him, walked out. No interaction."
+   },
+   {
+    "date": "Jul 07",
+    "source": "Social",
+    "rating": 2,
+    "osat": null,
+    "text": "Slowest service i've ever experienced. My children got tired of waiting so long. Restaurant needs way more employees. Would never come here again!"
+   },
+   {
+    "date": "Jul 05",
+    "source": "GES",
+    "rating": null,
+    "osat": 4,
+    "text": "The pizza wasn’t done fully and most of the crust stuck to the box because of being doughy"
+   },
+   {
+    "date": "Jul 04",
+    "source": "Social",
+    "rating": 5,
+    "osat": null,
+    "text": "Great food and service! Jennifer was amazing taking care of all her customers"
+   },
+   {
+    "date": "Jul 04",
+    "source": "Social",
+    "rating": 5,
+    "osat": null,
+    "text": "Fast, smooth, and efficient."
+   },
+   {
+    "date": "Jul 04",
+    "source": "Social",
+    "rating": 5,
+    "osat": null,
+    "text": "These guys are awesome!"
+   },
+   {
+    "date": "Jun 28",
+    "source": "GES",
+    "rating": null,
+    "osat": 5,
+    "text": "Friendly stff & delicious, hot pizza"
+   },
+   {
+    "date": "Jun 28",
+    "source": "GES",
+    "rating": null,
+    "osat": 5,
+    "text": "The employee was very warm and friendly. He did everything he could to be helpful. The order was correct and delicious"
+   }
+  ],
+  "commentCount": 47
+ },
+ "42659": {
+  "itin": {
+   "day": "Wed Jul 15",
+   "order": 6,
+   "time": "12:30–1:45 PM",
+   "label": "Destin"
+  },
+  "info": {
+   "name": "Destin",
+   "subconcept": "DELCO",
+   "address": "1012 Highway 98 E Ste 101",
+   "city": "Destin",
+   "state": "FL",
+   "zip": "32541",
+   "phone": "8503745836",
+   "gm": "Andrae Taylor",
+   "gmPhone": "4482389762"
+  },
+  "pl": {
+   "netSales": {
+    "p03": 47371.0,
+    "p04": 64104.0,
+    "p05": 49717.0,
+    "p06": 103735.0,
+    "p06pct": 1.0,
+    "p06ly": null,
+    "ytd": null,
+    "ytdly": 1.0
+   },
+   "totalRevenue": {
+    "p03": 49312.0,
+    "p04": 66500.0,
+    "p05": 51913.0,
+    "p06": 107311.0,
+    "p06pct": 1.0345,
+    "p06ly": null,
+    "ytd": null,
+    "ytdly": 1.0392
+   },
+   "cos": {
+    "p03": 12528.0,
+    "p04": 15993.0,
+    "p05": 11968.0,
+    "p06": 23304.0,
+    "p06pct": 0.2247,
+    "p06ly": null,
+    "ytd": null,
+    "ytdly": 0.2408
+   },
+   "laborTotal": {
+    "p03": 15872.0,
+    "p04": 20121.0,
+    "p05": 17507.0,
+    "p06": 28047.0,
+    "p06pct": 0.2704,
+    "p06ly": null,
+    "ytd": null,
+    "ytdly": 0.3414
+   },
+   "controllableProfit": {
+    "p03": 13103.0,
+    "p04": 21597.0,
+    "p05": 15647.0,
+    "p06": 45217.0,
+    "p06pct": 0.4359,
+    "p06ly": null,
+    "ytd": null,
+    "ytdly": 0.3162
+   },
+   "ebitda": {
+    "p03": 3339.0,
+    "p04": 8748.0,
+    "p05": 4036.0,
+    "p06": 26840.0,
+    "p06pct": 0.2587,
+    "p06ly": null,
+    "ytd": null,
+    "ytdly": 0.0766
+   }
+  },
+  "trend": {
+   "flag": null,
+   "dm": "Marc Gannon",
+   "weeks": [
+    "P06WK4",
+    "P07WK1",
+    "P07WK2",
+    "P07WK3"
+   ],
+   "salesGrowth": [
+    0.0828,
+    0.0373,
+    0.0453,
+    0.1752
+   ],
+   "txnGrowth": [
+    0.0021,
+    -0.1083,
+    -0.0461,
+    0.0331
+   ]
+  },
+  "smgWeek": {
+   "win": 56.2,
+   "count": 48
+  },
+  "smgPtd": {
+   "win": 56.2,
+   "count": 14
+  },
+  "cdr": {
+   "avgOtd": 24.061,
+   "otdU18": 0.396,
+   "del30": 0.451,
+   "del45": 0.263,
+   "promise": 0.424
+  },
+  "scorecard": {
+   "salesGrowth": null,
+   "salesScore": null,
+   "otd": 22.1016,
+   "otdScore": 1.0,
+   "win": 0.49,
+   "winScore": 3.0,
+   "profitGrowth": null,
+   "profitScore": null,
+   "retention": 0.8,
+   "retentionScore": 3.0
+  },
+  "hutbot": {
+   "onTime": 93.4,
+   "late": 2.0,
+   "missed": 4.6
+  },
+  "gmRoutine": {
+   "onTime": 96.7,
+   "late": 1.6,
+   "missed": 1.7
+  },
+  "comments": [
+   {
+    "date": "Jul 09",
+    "source": "GES",
+    "rating": null,
+    "osat": 1,
+    "text": "Never going to order food here"
+   },
+   {
+    "date": "Jul 06",
+    "source": "GES",
+    "rating": null,
+    "osat": 2,
+    "text": "I just want to say customer service wise as far as my experience in the store was great. I was greeted right away and the pizza was ready when I walked in. I tipped just for that reason because I appreciated the manner in which I was spoken to and how I was handed the pizza. Howe"
+   },
+   {
+    "date": "Jul 04",
+    "source": "Social",
+    "rating": 5,
+    "osat": null,
+    "text": "Great place to eat while in the area!"
+   },
+   {
+    "date": "Jul 02",
+    "source": "GES",
+    "rating": null,
+    "osat": 3,
+    "text": "I have ordered this from our PH at home. Wings come 8 to 4 ratio. Everytime! I got 4 to 4 and the quality was horrible. While I ordered our large 3 topping wrong (edited crust at last minute) it took toppings away! This was my fault no big deal I suppose (maybe reaching out since"
+   },
+   {
+    "date": "Jun 29",
+    "source": "GES",
+    "rating": null,
+    "osat": 5,
+    "text": "such great food that everybody decided we would go back again before our vacation is over. We may give Pizza Hut another try when we get back home."
+   },
+   {
+    "date": "Jun 27",
+    "source": "GES",
+    "rating": null,
+    "osat": 5,
+    "text": "Best pizza in town. Don't change a thing."
+   },
+   {
+    "date": "Jun 26",
+    "source": "GES",
+    "rating": null,
+    "osat": 4,
+    "text": "Missing 2 wings. It should have been a 6 count but it was a 4 count. No dipping sauces included either. I’m not sure if ranch is usually included. If not it should be!"
+   },
+   {
+    "date": "Jun 22",
+    "source": "GES",
+    "rating": null,
+    "osat": 4,
+    "text": "Classic pan was great as always. The new Parmesan crusted was not nearly as good as original pan."
+   }
+  ],
+  "commentCount": 64
+ },
+ "39412": {
+  "itin": {
+   "day": "Wed Jul 15",
+   "order": 7,
+   "time": "2:00–3:30 PM",
+   "label": "Miracle Strip"
+  },
+  "info": {
+   "name": "Miracle Strip",
+   "subconcept": "RBD",
+   "address": "141 Miracle Strip Pkwy SW",
+   "city": "Fort Walton Beach",
+   "state": "FL",
+   "zip": "32548",
+   "phone": "8503745834",
+   "gm": "Dawn Lee",
+   "gmPhone": "8504966469"
+  },
+  "pl": {
+   "netSales": {
+    "p03": 58789.0,
+    "p04": 68823.0,
+    "p05": 59777.0,
+    "p06": 89538.0,
+    "p06pct": 1.0,
+    "p06ly": 84519.0,
+    "ytd": 365831.0,
+    "ytdly": 391248.0
+   },
+   "totalRevenue": {
+    "p03": 62296.0,
+    "p04": 73303.0,
+    "p05": 63887.0,
+    "p06": 95113.0,
+    "p06pct": 1.0623,
+    "p06ly": 90364.0,
+    "ytd": 389678.0,
+    "ytdly": 419343.0
+   },
+   "cos": {
+    "p03": 14854.0,
+    "p04": 19002.0,
+    "p05": 13420.0,
+    "p06": 20563.0,
+    "p06pct": 0.2297,
+    "p06ly": 18646.0,
+    "ytd": 90327.0,
+    "ytdly": 91892.0
+   },
+   "laborTotal": {
+    "p03": 21180.0,
+    "p04": 23116.0,
+    "p05": 23567.0,
+    "p06": 27999.0,
+    "p06pct": 0.3127,
+    "p06ly": 28983.0,
+    "ytd": 135915.0,
+    "ytdly": 159779.0
+   },
+   "controllableProfit": {
+    "p03": 9753.0,
+    "p04": 16622.0,
+    "p05": 14192.0,
+    "p06": 28770.0,
+    "p06pct": 0.3213,
+    "p06ly": 28758.0,
+    "ytd": 82931.0,
+    "ytdly": 95238.0
+   },
+   "ebitda": {
+    "p03": -4095.0,
+    "p04": 924.0,
+    "p05": -633.0,
+    "p06": 10514.0,
+    "p06pct": 0.1174,
+    "p06ly": 8795.0,
+    "ytd": -6693.0,
+    "ytdly": -12003.0
+   }
+  },
+  "trend": {
+   "flag": null,
+   "dm": "Marc Gannon",
+   "weeks": [
+    "P06WK4",
+    "P07WK1",
+    "P07WK2",
+    "P07WK3"
+   ],
+   "salesGrowth": [
+    0.2036,
+    0.0544,
+    0.0786,
+    0.1557
+   ],
+   "txnGrowth": [
+    0.3018,
+    0.1046,
+    0.1099,
+    0.1482
+   ]
+  },
+  "smgWeek": {
+   "win": 51.4,
+   "count": 37
+  },
+  "smgPtd": {
+   "win": 51.4,
+   "count": 16
+  },
+  "cdr": {
+   "avgOtd": 30.498,
+   "otdU18": 0.205,
+   "del30": 0.226,
+   "del45": 0.435,
+   "promise": 0.437
+  },
+  "scorecard": {
+   "salesGrowth": 0.0594,
+   "salesScore": 4.0,
+   "otd": 21.2533,
+   "otdScore": 2.0,
+   "win": 0.6477,
+   "winScore": 4.0,
+   "profitGrowth": 1729.62,
+   "profitScore": 4.0,
+   "retention": 0.9167,
+   "retentionScore": 4.0
+  },
+  "hutbot": {
+   "onTime": 94.0,
+   "late": 2.3,
+   "missed": 3.7
+  },
+  "gmRoutine": {
+   "onTime": 94.9,
+   "late": 2.1,
+   "missed": 3.0
+  },
+  "comments": [
+   {
+    "date": "Jul 11",
+    "source": "Social",
+    "rating": 3,
+    "osat": null,
+    "text": "This location has the potential to be really good. It needs a little love and remodeling."
+   },
+   {
+    "date": "Jul 10",
+    "source": "GES",
+    "rating": null,
+    "osat": 5,
+    "text": "Pizza and cheesesticks were amazing. Fun to eat on the beach."
+   },
+   {
+    "date": "Jul 04",
+    "source": "GES",
+    "rating": null,
+    "osat": 5,
+    "text": "App makes it easy to order. Location is close by, friendly staff. Overall pleasant experience"
+   },
+   {
+    "date": "Jul 02",
+    "source": "GES",
+    "rating": null,
+    "osat": 4,
+    "text": "Pepperoni slices were too thin and not enough were on the pizza. Black olives tasted good, but they were too sparse. There was a good amount of cheese, but the pizza sauce was spread too thin. Doesn’t compete with my local neighborhood pizza parlor. I was disappointed."
+   },
+   {
+    "date": "Jun 26",
+    "source": "GES",
+    "rating": null,
+    "osat": 5,
+    "text": "We like to order pizza hut when we're in town!"
+   },
+   {
+    "date": "Jun 21",
+    "source": "GES",
+    "rating": null,
+    "osat": 2,
+    "text": "I wasn’t satisfied at all!"
+   },
+   {
+    "date": "Jun 20",
+    "source": "GES",
+    "rating": null,
+    "osat": 5,
+    "text": "I ordered the wrong flavor of wings and they made an exception because they had an order come in for my flavor to remake them in the flavor I wanted. It was amazing and didn’t ruin my dinner meal for the family."
+   },
+   {
+    "date": "Jun 19",
+    "source": "GES",
+    "rating": null,
+    "osat": 1,
+    "text": "They were really rude and didnt even let me talk and the food was undercooked"
+   }
+  ],
+  "commentCount": 55
+ },
+ "39430": {
+  "itin": {
+   "day": "Wed Jul 15",
+   "order": 8,
+   "time": "3:45–5:00 PM",
+   "label": "Racetrack Rd"
+  },
+  "info": {
+   "name": "Racetrack",
+   "subconcept": "DELCO",
+   "address": "430-A Racetrack Rd NE",
+   "city": "Fort Walton Beach",
+   "state": "FL",
+   "zip": "32547",
+   "phone": "8503745833",
+   "gm": "Brandon Seeley",
+   "gmPhone": "7756363784"
+  },
+  "pl": {
+   "netSales": {
+    "p03": 61167.0,
+    "p04": 61616.0,
+    "p05": 65428.0,
+    "p06": 72433.0,
+    "p06pct": 1.0,
+    "p06ly": 67304.0,
+    "ytd": 381147.0,
+    "ytdly": 386970.0
+   },
+   "totalRevenue": {
+    "p03": 65272.0,
+    "p04": 66102.0,
+    "p05": 69898.0,
+    "p06": 77088.0,
+    "p06pct": 1.0643,
+    "p06ly": 72488.0,
+    "ytd": 407232.0,
+    "ytdly": 416869.0
+   },
+   "cos": {
+    "p03": 16860.0,
+    "p04": 16545.0,
+    "p05": 16340.0,
+    "p06": 18765.0,
+    "p06pct": 0.2591,
+    "p06ly": 16825.0,
+    "ytd": 98475.0,
+    "ytdly": 98321.0
+   },
+   "laborTotal": {
+    "p03": 23193.0,
+    "p04": 23427.0,
+    "p05": 24746.0,
+    "p06": 25494.0,
+    "p06pct": 0.352,
+    "p06ly": 23505.0,
+    "ytd": 143258.0,
+    "ytdly": 144200.0
+   },
+   "controllableProfit": {
+    "p03": 14239.0,
+    "p04": 14907.0,
+    "p05": 16109.0,
+    "p06": 20708.0,
+    "p06pct": 0.2859,
+    "p06ly": 20754.0,
+    "ytd": 97510.0,
+    "ytdly": 109178.0
+   },
+   "ebitda": {
+    "p03": 3548.0,
+    "p04": 4585.0,
+    "p05": 5510.0,
+    "p06": 8504.0,
+    "p06pct": 0.1174,
+    "p06ly": 7523.0,
+    "ytd": 32715.0,
+    "ytdly": 35165.0
+   }
+  },
+  "trend": {
+   "flag": "Caution",
+   "dm": "Marc Gannon",
+   "weeks": [
+    "P06WK4",
+    "P07WK1",
+    "P07WK2",
+    "P07WK3"
+   ],
+   "salesGrowth": [
+    -0.0059,
+    0.1607,
+    0.0717,
+    0.1397
+   ],
+   "txnGrowth": [
+    0.0701,
+    0.1629,
+    0.1599,
+    0.1822
+   ]
+  },
+  "smgWeek": {
+   "win": 56.8,
+   "count": 37
+  },
+  "smgPtd": {
+   "win": 56.8,
+   "count": 16
+  },
+  "cdr": {
+   "avgOtd": 21.585,
+   "otdU18": 0.513,
+   "del30": 0.553,
+   "del45": 0.167,
+   "promise": 0.711
+  },
+  "scorecard": {
+   "salesGrowth": 0.0762,
+   "salesScore": 5.0,
+   "otd": 19.0946,
+   "otdScore": 3.0,
+   "win": 0.4918,
+   "winScore": 3.0,
+   "profitGrowth": 991.48,
+   "profitScore": 3.0,
+   "retention": 0.9091,
+   "retentionScore": 4.0
+  },
+  "hutbot": {
+   "onTime": 91.7,
+   "late": 5.7,
+   "missed": 2.6
+  },
+  "gmRoutine": {
+   "onTime": 91.6,
+   "late": 5.3,
+   "missed": 3.1
+  },
+  "comments": [
+   {
+    "date": "Jul 03",
+    "source": "GES",
+    "rating": null,
+    "osat": 4,
+    "text": "Pizza was doughy not cooked enough"
+   },
+   {
+    "date": "Jul 02",
+    "source": "GES",
+    "rating": null,
+    "osat": 2,
+    "text": "I placed an order to arrive at 11:45 as the meeting started at 12:00.  It arrived @ 12:15 and the Doordash driver said he was just notified the ticket was ready a few minutes before coming.    The food was late for my meeting.  Very disappointed since I spend quite a bit for the "
+   },
+   {
+    "date": "Jul 01",
+    "source": "GES",
+    "rating": null,
+    "osat": 1,
+    "text": "Was over an hour late and was not hot and fresh"
+   },
+   {
+    "date": "Jun 29",
+    "source": "GES",
+    "rating": null,
+    "osat": 4,
+    "text": "We ordered the “new” Parmesan Pan Pizza and were pretty disappointed. For starters, I didn’t understand why we were only allowed to choose three toppings. On top of that, I honestly don’t think we got the Parmesan crust. It tasted just like a regular pan pizza.\r\n\r\nI didn’t call t"
+   },
+   {
+    "date": "Jun 22",
+    "source": "GES",
+    "rating": null,
+    "osat": 5,
+    "text": "Its was within walking distance and ready on time. Thanks"
+   },
+   {
+    "date": "Jun 22",
+    "source": "GES",
+    "rating": null,
+    "osat": 1,
+    "text": "I still prefer pizza hut compared to competitiors but the staff was very slow, not during rush hour, & pizza was cooked in an untimelt manner and still burned."
+   },
+   {
+    "date": "Jun 22",
+    "source": "GES",
+    "rating": null,
+    "osat": 5,
+    "text": "The staff was polite and friendly when the greeted me as I walked into the store.  Overall, it was a very pleasant experience!"
+   },
+   {
+    "date": "Jun 20",
+    "source": "GES",
+    "rating": null,
+    "osat": 2,
+    "text": "I never received my 2 liter that I paid for."
+   }
+  ],
+  "commentCount": 35
+ },
+ "39416": {
+  "itin": {
+   "day": "Thu Jul 16",
+   "order": 9,
+   "time": "11:00 AM–12:15 PM",
+   "label": "Niceville"
+  },
+  "info": {
+   "name": "Niceville",
+   "subconcept": "DELCO",
+   "address": "1017 John Sims Pkwy E",
+   "city": "Niceville",
+   "state": "FL",
+   "zip": "32578",
+   "phone": "8503745839",
+   "gm": "Robert Lowe",
+   "gmPhone": "8508260515"
+  },
+  "pl": {
+   "netSales": {
+    "p03": 44471.0,
+    "p04": 44273.0,
+    "p05": 43109.0,
+    "p06": 44690.0,
+    "p06pct": 1.0,
+    "p06ly": 45456.0,
+    "ytd": 264966.0,
+    "ytdly": 264666.0
+   },
+   "totalRevenue": {
+    "p03": 47502.0,
+    "p04": 47161.0,
+    "p05": 46103.0,
+    "p06": 47636.0,
+    "p06pct": 1.0659,
+    "p06ly": 48651.0,
+    "ytd": 282540.0,
+    "ytdly": 283440.0
+   },
+   "cos": {
+    "p03": 12320.0,
+    "p04": 12116.0,
+    "p05": 11729.0,
+    "p06": 11054.0,
+    "p06pct": 0.2473,
+    "p06ly": 11998.0,
+    "ytd": 70041.0,
+    "ytdly": 69571.0
+   },
+   "laborTotal": {
+    "p03": 20441.0,
+    "p04": 19285.0,
+    "p05": 19359.0,
+    "p06": 17521.0,
+    "p06pct": 0.3921,
+    "p06ly": 20033.0,
+    "ytd": 114807.0,
+    "ytdly": 117864.0
+   },
+   "controllableProfit": {
+    "p03": 7696.0,
+    "p04": 7476.0,
+    "p05": 5365.0,
+    "p06": 9295.0,
+    "p06pct": 0.208,
+    "p06ly": 7634.0,
+    "ytd": 39126.0,
+    "ytdly": 42251.0
+   },
+   "ebitda": {
+    "p03": -287.0,
+    "p04": -438.0,
+    "p05": -2405.0,
+    "p06": 823.0,
+    "p06pct": 0.0184,
+    "p06ly": -2531.0,
+    "ytd": -9160.0,
+    "ytdly": -14720.0
+   }
+  },
+  "trend": {
+   "flag": "Caution",
+   "dm": "Marc Gannon",
+   "weeks": [
+    "P06WK4",
+    "P07WK1",
+    "P07WK2",
+    "P07WK3"
+   ],
+   "salesGrowth": [
+    -0.0242,
+    -0.0765,
+    -0.0396,
+    -0.0286
+   ],
+   "txnGrowth": [
+    0.0255,
+    -0.0441,
+    -0.0089,
+    -0.0488
+   ]
+  },
+  "smgWeek": {
+   "win": 55.0,
+   "count": 20
+  },
+  "smgPtd": {
+   "win": 55.0,
+   "count": 10
+  },
+  "cdr": {
+   "avgOtd": 20.311,
+   "otdU18": 0.541,
+   "del30": 0.496,
+   "del45": 0.102,
+   "promise": 0.788
+  },
+  "scorecard": {
+   "salesGrowth": -0.0168,
+   "salesScore": 2.0,
+   "otd": 18.0,
+   "otdScore": 4.0,
+   "win": 0.5135,
+   "winScore": 3.0,
+   "profitGrowth": 3364.14,
+   "profitScore": 5.0,
+   "retention": 1.0,
+   "retentionScore": 5.0
+  },
+  "hutbot": {
+   "onTime": 94.0,
+   "late": 2.7,
+   "missed": 3.3
+  },
+  "gmRoutine": {
+   "onTime": 95.7,
+   "late": 1.7,
+   "missed": 2.6
+  },
+  "comments": [
+   {
+    "date": "Jul 10",
+    "source": "GES",
+    "rating": null,
+    "osat": 1,
+    "text": "Sub-tasking to door dash for delivery. Expected delivery was 1145 with a 1115 order time. Food wasn't delivered until 1212 and food was room temperature at the hottest and slightly soggy. Late delivery time almost led to me canceling order minutes before due to other obligations."
+   },
+   {
+    "date": "Jul 05",
+    "source": "GES",
+    "rating": null,
+    "osat": 5,
+    "text": "Best pizza I’ve gotten in a very long time. It was hot when we received it and the best part it wasn’t a bit greasy like some others are. It was delicious I’ll definitely be ordering again very soon. When someone asks me where they should get their next pizza from I’ll definitely"
+   },
+   {
+    "date": "Jun 28",
+    "source": "GES",
+    "rating": null,
+    "osat": 4,
+    "text": "I commented to the nice man that helped me that the pizza I ordered earlier in the day was better than the pizza I got in the evening. The pizza had enough mushrooms, sausage and black olives but not enough cheese to make it \"juicy\" and not dry. I'm sure you time the cooking proc"
+   },
+   {
+    "date": "Jun 28",
+    "source": "GES",
+    "rating": null,
+    "osat": 4,
+    "text": "The pizza is always a little overcooked."
+   },
+   {
+    "date": "Jun 18",
+    "source": "GES",
+    "rating": null,
+    "osat": 4,
+    "text": "Bring back your original pan pizza from the 80s"
+   },
+   {
+    "date": "Jun 15",
+    "source": "GES",
+    "rating": null,
+    "osat": 1,
+    "text": "This was the worst pizza I've ever had.  No sauce,  way overcooked, pepperoni was brown and crispy, beef was burnt.  Crust wasn't crispy, it was hard.  I didn't take it back because too much effort and expense.  I used to love Pizza Hut, I have no intentions of ever going back."
+   },
+   {
+    "date": "Jun 14",
+    "source": "Social",
+    "rating": 1,
+    "osat": null,
+    "text": "Ordered a pepperoni/beef thin crust with extra sauce. Almost no sauce and was overcooked. Didn't return, too much effort and was hungry. App does not have a feedback capability. Worst pizza I can remember."
+   },
+   {
+    "date": "Jun 09",
+    "source": "GES",
+    "rating": null,
+    "osat": 2,
+    "text": "The pizza was very soggy with oil they put some kind of cheese on the crust and other kind of green spices all over the pizza that gave it a not so pleasant taste"
+   }
+  ],
+  "commentCount": 30
+ },
+ "39413": {
+  "itin": {
+   "day": "Thu Jul 16",
+   "order": 10,
+   "time": "12:45–1:45 PM",
+   "label": "Navarre"
+  },
+  "info": {
+   "name": "Navarre",
+   "subconcept": "RBD",
+   "address": "8692 Navarre Pkwy",
+   "city": "Navarre",
+   "state": "FL",
+   "zip": "32566",
+   "phone": "8503745838",
+   "gm": "James Carnes",
+   "gmPhone": "8508128123"
+  },
+  "pl": {
+   "netSales": {
+    "p03": 87795.0,
+    "p04": 92667.0,
+    "p05": 87248.0,
+    "p06": 106689.0,
+    "p06pct": 1.0,
+    "p06ly": 107414.0,
+    "ytd": 533712.0,
+    "ytdly": 554441.0
+   },
+   "totalRevenue": {
+    "p03": 94032.0,
+    "p04": 99009.0,
+    "p05": 93284.0,
+    "p06": 113497.0,
+    "p06pct": 1.0638,
+    "p06ly": 114756.0,
+    "ytd": 570541.0,
+    "ytdly": 595275.0
+   },
+   "cos": {
+    "p03": 23616.0,
+    "p04": 23454.0,
+    "p05": 21320.0,
+    "p06": 26662.0,
+    "p06pct": 0.2499,
+    "p06ly": 25589.0,
+    "ytd": 134323.0,
+    "ytdly": 138603.0
+   },
+   "laborTotal": {
+    "p03": 31498.0,
+    "p04": 31895.0,
+    "p05": 31465.0,
+    "p06": 35027.0,
+    "p06pct": 0.3283,
+    "p06ly": 34063.0,
+    "ytd": 191099.0,
+    "ytdly": 193652.0
+   },
+   "controllableProfit": {
+    "p03": 23267.0,
+    "p04": 27341.0,
+    "p05": 24827.0,
+    "p06": 34572.0,
+    "p06pct": 0.324,
+    "p06ly": 38232.0,
+    "ytd": 152169.0,
+    "ytdly": 165280.0
+   },
+   "ebitda": {
+    "p03": 9640.0,
+    "p04": 13028.0,
+    "p05": 11072.0,
+    "p06": 18207.0,
+    "p06pct": 0.1707,
+    "p06ly": 19981.0,
+    "ytd": 66973.0,
+    "ytdly": 65963.0
+   }
+  },
+  "trend": {
+   "flag": null,
+   "dm": "Marc Gannon",
+   "weeks": [
+    "P06WK4",
+    "P07WK1",
+    "P07WK2",
+    "P07WK3"
+   ],
+   "salesGrowth": [
+    0.0127,
+    -0.0046,
+    0.0638,
+    0.0363
+   ],
+   "txnGrowth": [
+    -0.0189,
+    0.0177,
+    0.0892,
+    0.0742
+   ]
+  },
+  "smgWeek": {
+   "win": 40.7,
+   "count": 54
+  },
+  "smgPtd": {
+   "win": 40.7,
+   "count": 30
+  },
+  "cdr": {
+   "avgOtd": 19.927,
+   "otdU18": 0.54,
+   "del30": 0.432,
+   "del45": 0.204,
+   "promise": 0.613
+  },
+  "scorecard": {
+   "salesGrowth": -0.0067,
+   "salesScore": 2.0,
+   "otd": 20.0569,
+   "otdScore": 2.0,
+   "win": 0.4756,
+   "winScore": 3.0,
+   "profitGrowth": -1763.83,
+   "profitScore": 1.0,
+   "retention": 0.9231,
+   "retentionScore": 4.0
+  },
+  "hutbot": {
+   "onTime": 99.0,
+   "late": 0.7,
+   "missed": 0.3
+  },
+  "gmRoutine": {
+   "onTime": 98.8,
+   "late": 1.2,
+   "missed": 0.0
+  },
+  "comments": [
+   {
+    "date": "Jul 08",
+    "source": "GES",
+    "rating": null,
+    "osat": 3,
+    "text": "Ordered sauce for the pizza and it was missing.  Delivery driver was serviced by DoorDash and they ignored my text when I told them something was missing.  Physically went to Pizza Hut today (the following day) to speak to someone to make yesterday's order right.  It was addresse"
+   },
+   {
+    "date": "Jul 05",
+    "source": "GES",
+    "rating": null,
+    "osat": 4,
+    "text": "Great service, pizza was hot but there was no sauce on the stuff crust with cupped pepperoni pizza."
+   },
+   {
+    "date": "Jul 03",
+    "source": "GES",
+    "rating": null,
+    "osat": 5,
+    "text": "Saph had outstanding customer service I was extremely satisfied!"
+   },
+   {
+    "date": "Jul 02",
+    "source": "GES",
+    "rating": null,
+    "osat": 5,
+    "text": "Great customer service, best tasting pizza in navarre"
+   },
+   {
+    "date": "Jul 02",
+    "source": "GES",
+    "rating": null,
+    "osat": 2,
+    "text": "The amount of toppings on your pizzas is too little.  We even paid for Extra bit did not get it.  This has happened very often and the quality of the Italian sausage is lacking.  We are switching to a competitor from now on for all of our pizza orders.  They have you beat by mile"
+   },
+   {
+    "date": "Jul 02",
+    "source": "GES",
+    "rating": null,
+    "osat": 5,
+    "text": "The service, speed and quality is always great at this location. I hope you know you’ve got great employees at the Navarre location."
+   },
+   {
+    "date": "Jun 29",
+    "source": "GES",
+    "rating": null,
+    "osat": 1,
+    "text": "driver was cool pizza hut sucks personal pan pizza should be labeled kids pizza instead."
+   },
+   {
+    "date": "Jun 29",
+    "source": "GES",
+    "rating": null,
+    "osat": 2,
+    "text": "Ordered pizza as usual.  30 minutes after the delivery window passed I called the store to check on my order.  The gentleman I spoke with, James I believe was very polite and helpful.  After Senegal minutes checking on my order he told me it was on the way.  The pizza was deliver"
+   }
+  ],
+  "commentCount": 65
+ },
+ "39529": {
+  "itin": {
+   "day": "Thu Jul 16",
+   "order": 11,
+   "time": "2:30–3:30 PM",
+   "label": "Crestview"
+  },
+  "info": {
+   "name": "Crestview",
+   "subconcept": "DELCO",
+   "address": "2221 S Ferdon Blvd",
+   "city": "Crestview",
+   "state": "FL",
+   "zip": "32536",
+   "phone": "8503745835",
+   "gm": "Rebecca Anderson",
+   "gmPhone": "8502921299"
+  },
+  "pl": {
+   "netSales": {
+    "p03": 93284.0,
+    "p04": 89933.0,
+    "p05": 88702.0,
+    "p06": 94849.0,
+    "p06pct": 1.0,
+    "p06ly": 89600.0,
+    "ytd": 548453.0,
+    "ytdly": 533875.0
+   },
+   "totalRevenue": {
+    "p03": 98510.0,
+    "p04": 95197.0,
+    "p05": 93669.0,
+    "p06": 100006.0,
+    "p06pct": 1.0544,
+    "p06ly": 94800.0,
+    "ytd": 579368.0,
+    "ytdly": 565229.0
+   },
+   "cos": {
+    "p03": 24490.0,
+    "p04": 23467.0,
+    "p05": 23360.0,
+    "p06": 24341.0,
+    "p06pct": 0.2566,
+    "p06ly": 22093.0,
+    "ytd": 140298.0,
+    "ytdly": 136757.0
+   },
+   "laborTotal": {
+    "p03": 27833.0,
+    "p04": 28328.0,
+    "p05": 28584.0,
+    "p06": 29631.0,
+    "p06pct": 0.3124,
+    "p06ly": 29902.0,
+    "ytd": 172286.0,
+    "ytdly": 183522.0
+   },
+   "controllableProfit": {
+    "p03": 31992.0,
+    "p04": 27624.0,
+    "p05": 25829.0,
+    "p06": 31492.0,
+    "p06pct": 0.332,
+    "p06ly": 29956.0,
+    "ytd": 180081.0,
+    "ytdly": 166294.0
+   },
+   "ebitda": {
+    "p03": 16054.0,
+    "p04": 12166.0,
+    "p05": 10968.0,
+    "p06": 14903.0,
+    "p06pct": 0.1571,
+    "p06ly": 13364.0,
+    "ytd": 85425.0,
+    "ytdly": 70927.0
+   }
+  },
+  "trend": {
+   "flag": null,
+   "dm": "Marc Gannon",
+   "weeks": [
+    "P06WK4",
+    "P07WK1",
+    "P07WK2",
+    "P07WK3"
+   ],
+   "salesGrowth": [
+    -0.0325,
+    -0.0465,
+    0.1906,
+    0.1416
+   ],
+   "txnGrowth": [
+    0.0124,
+    -0.0079,
+    0.2228,
+    0.2206
+   ]
+  },
+  "smgWeek": {
+   "win": 51.1,
+   "count": 45
+  },
+  "smgPtd": {
+   "win": 51.1,
+   "count": 15
+  },
+  "cdr": {
+   "avgOtd": 17.73,
+   "otdU18": 0.599,
+   "del30": 0.588,
+   "del45": 0.064,
+   "promise": 0.802
+  },
+  "scorecard": {
+   "salesGrowth": 0.0586,
+   "salesScore": 4.0,
+   "otd": 17.5708,
+   "otdScore": 4.0,
+   "win": 0.6622,
+   "winScore": 4.0,
+   "profitGrowth": 1549.82,
+   "profitScore": 4.0,
+   "retention": 1.0,
+   "retentionScore": 5.0
+  },
+  "hutbot": {
+   "onTime": 96.6,
+   "late": 3.4,
+   "missed": 0.0
+  },
+  "gmRoutine": {
+   "onTime": 97.1,
+   "late": 2.9,
+   "missed": 0.0
+  },
+  "comments": [
+   {
+    "date": "Jul 11",
+    "source": "GES",
+    "rating": null,
+    "osat": 4,
+    "text": "Tried the new hand tossed. It tasted good but felt almost like a thin crust.  So I won't be ordering that again"
+   },
+   {
+    "date": "Jul 09",
+    "source": "GES",
+    "rating": null,
+    "osat": 5,
+    "text": "All three of my pan pizzas were very good.  I wish you sent coupons for my orders."
+   },
+   {
+    "date": "Jul 09",
+    "source": "GES",
+    "rating": null,
+    "osat": 4,
+    "text": "The pizza was great and the customer service was fine but waiting for them to make my pizza again because the first one was given to someone else or something was a little irritating."
+   },
+   {
+    "date": "Jun 30",
+    "source": "Social",
+    "rating": 5,
+    "osat": null,
+    "text": "Great people here. Always kind and ahead of schedule."
+   },
+   {
+    "date": "Jun 30",
+    "source": "Doordash",
+    "rating": null,
+    "osat": null,
+    "text": "You offer a buy one get one free personal pan pizza deal just to not honor it. I wasn't given my free personal pan with my order and nobody can do anything about it: that is why I purchased that deal."
+   },
+   {
+    "date": "Jun 28",
+    "source": "GES",
+    "rating": null,
+    "osat": 5,
+    "text": "Staff was very helpful. Wish all Pizza Huts were as good as this."
+   },
+   {
+    "date": "Jun 26",
+    "source": "GES",
+    "rating": null,
+    "osat": 4,
+    "text": "I don't buy as much pizza as I use to because the price for me is so high."
+   },
+   {
+    "date": "Jun 24",
+    "source": "GES",
+    "rating": null,
+    "osat": 5,
+    "text": "Excellent food and service"
+   }
+  ],
+  "commentCount": 63
+ },
+ "39522": {
+  "itin": {
+   "day": "Fri Jul 17",
+   "order": 12,
+   "time": "11:00 AM–12:15 PM",
+   "label": "Ellenwood"
+  },
+  "info": {
+   "name": "Ellenwood",
+   "subconcept": "DELCO",
+   "address": "2820 E Atlanta Rd",
+   "city": "Ellenwood",
+   "state": "GA",
+   "zip": "30294",
+   "phone": "4706152030",
+   "gm": "Gary Burney",
+   "gmPhone": "4047828121"
+  },
+  "pl": {
+   "netSales": {
+    "p03": 100515.0,
+    "p04": 99283.0,
+    "p05": 89834.0,
+    "p06": 116739.0,
+    "p06pct": 1.0,
+    "p06ly": 113588.0,
+    "ytd": 614303.0,
+    "ytdly": 649886.0
+   },
+   "totalRevenue": {
+    "p03": 104604.0,
+    "p04": 103182.0,
+    "p05": 93727.0,
+    "p06": 121193.0,
+    "p06pct": 1.0382,
+    "p06ly": 117915.0,
+    "ytd": 639309.0,
+    "ytdly": 672946.0
+   },
+   "cos": {
+    "p03": 27813.0,
+    "p04": 28867.0,
+    "p05": 26896.0,
+    "p06": 31264.0,
+    "p06pct": 0.2678,
+    "p06ly": 29431.0,
+    "ytd": 166636.0,
+    "ytdly": 168433.0
+   },
+   "laborTotal": {
+    "p03": 24005.0,
+    "p04": 25036.0,
+    "p05": 24421.0,
+    "p06": 25226.0,
+    "p06pct": 0.2161,
+    "p06ly": 26251.0,
+    "ytd": 150537.0,
+    "ytdly": 156122.0
+   },
+   "controllableProfit": {
+    "p03": 34007.0,
+    "p04": 36944.0,
+    "p05": 28358.0,
+    "p06": 47309.0,
+    "p06pct": 0.4053,
+    "p06ly": 45598.0,
+    "ytd": 229458.0,
+    "ytdly": 253198.0
+   },
+   "ebitda": {
+    "p03": 17976.0,
+    "p04": 22397.0,
+    "p05": 16964.0,
+    "p06": 30285.0,
+    "p06pct": 0.2594,
+    "p06ly": 28399.0,
+    "ytd": 138145.0,
+    "ytdly": 156994.0
+   }
+  },
+  "trend": {
+   "flag": null,
+   "dm": "Ebony Simmons",
+   "weeks": [
+    "P06WK4",
+    "P07WK1",
+    "P07WK2",
+    "P07WK3"
+   ],
+   "salesGrowth": [
+    0.0316,
+    -0.0783,
+    0.0572,
+    0.0625
+   ],
+   "txnGrowth": [
+    0.0315,
+    -0.0721,
+    0.0632,
+    0.0967
+   ]
+  },
+  "smgWeek": {
+   "win": 50.6,
+   "count": 87
+  },
+  "smgPtd": {
+   "win": 50.6,
+   "count": 28
+  },
+  "cdr": {
+   "avgOtd": 19.05,
+   "otdU18": 0.516,
+   "del30": 0.534,
+   "del45": 0.112,
+   "promise": 0.735
+  },
+  "scorecard": {
+   "salesGrowth": 0.0277,
+   "salesScore": 3.0,
+   "otd": 20.367,
+   "otdScore": 2.0,
+   "win": 0.4909,
+   "winScore": 3.0,
+   "profitGrowth": 1896.65,
+   "profitScore": 4.0,
+   "retention": 0.6,
+   "retentionScore": 1.0
+  },
+  "hutbot": {
+   "onTime": 89.7,
+   "late": 6.8,
+   "missed": 3.5
+  },
+  "gmRoutine": {
+   "onTime": 95.9,
+   "late": 4.1,
+   "missed": 0.0
+  },
+  "comments": [
+   {
+    "date": "Jul 11",
+    "source": "GES",
+    "rating": null,
+    "osat": 5,
+    "text": "I love the hut."
+   },
+   {
+    "date": "Jul 10",
+    "source": "GES",
+    "rating": null,
+    "osat": 4,
+    "text": "I would have liked to have more and equal portions of mean and vegetables on my order. \r\nMost of the chicken was clumped up on the middle pieces. \r\nOverall I was satisfied with my order."
+   },
+   {
+    "date": "Jul 09",
+    "source": "GES",
+    "rating": null,
+    "osat": 5,
+    "text": "The wings were very tasty. Most important the breadsticks were freshly cooked"
+   },
+   {
+    "date": "Jul 09",
+    "source": "GES",
+    "rating": null,
+    "osat": 5,
+    "text": "The pizza was hot and delicious.  One of the best pick-ups I have experienced."
+   },
+   {
+    "date": "Jul 06",
+    "source": "GES",
+    "rating": null,
+    "osat": 1,
+    "text": "The pizza did not taste good at all. There were limited toppings and hardly any sauce on the pizza.\r\n\r\nThe cashier refused to enter the digital gift card information presented. She handed me the device to type in the card information myself."
+   },
+   {
+    "date": "Jul 05",
+    "source": "GES",
+    "rating": null,
+    "osat": 4,
+    "text": "The pizza did no have all of my toppings"
+   },
+   {
+    "date": "Jul 05",
+    "source": "GES",
+    "rating": null,
+    "osat": 1,
+    "text": "Didn’t receive half my order and the only solution they gave me was to come back another day for a refund because they were extremely busy !"
+   },
+   {
+    "date": "Jul 02",
+    "source": "GES",
+    "rating": null,
+    "osat": 3,
+    "text": "I paid extra to have extra pepperoni added on the pizza, and bacon added to half. The pizza I received has less toppings than what I would have expected on a regular pepperoni pizza."
+   }
+  ],
+  "commentCount": 102
+ },
+ "39383": {
+  "itin": {
+   "day": "Fri Jul 17",
+   "order": 13,
+   "time": "12:30–1:45 PM",
+   "label": "Stockbridge"
+  },
+  "info": {
+   "name": "Stockbridge",
+   "subconcept": "DELCO",
+   "address": "4491 N Henry Blvd",
+   "city": "Stockbridge",
+   "state": "GA",
+   "zip": "30281",
+   "phone": "6784030674",
+   "gm": "Ronald George",
+   "gmPhone": "7708754029"
+  },
+  "pl": {
+   "netSales": {
+    "p03": 65029.0,
+    "p04": 61583.0,
+    "p05": 61803.0,
+    "p06": 69013.0,
+    "p06pct": 1.0,
+    "p06ly": 71804.0,
+    "ytd": 375766.0,
+    "ytdly": 416367.0
+   },
+   "totalRevenue": {
+    "p03": 68589.0,
+    "p04": 65006.0,
+    "p05": 65141.0,
+    "p06": 72732.0,
+    "p06pct": 1.0539,
+    "p06ly": 76248.0,
+    "ytd": 396360.0,
+    "ytdly": 440790.0
+   },
+   "cos": {
+    "p03": 17844.0,
+    "p04": 16754.0,
+    "p05": 16988.0,
+    "p06": 19072.0,
+    "p06pct": 0.2764,
+    "p06ly": 20051.0,
+    "ytd": 101156.0,
+    "ytdly": 113549.0
+   },
+   "laborTotal": {
+    "p03": 18006.0,
+    "p04": 18188.0,
+    "p05": 18300.0,
+    "p06": 16032.0,
+    "p06pct": 0.2323,
+    "p06ly": 20128.0,
+    "ytd": 104668.0,
+    "ytdly": 111910.0
+   },
+   "controllableProfit": {
+    "p03": 28572.0,
+    "p04": 19158.0,
+    "p05": 16436.0,
+    "p06": 32010.0,
+    "p06pct": 0.4638,
+    "p06ly": 27403.0,
+    "ytd": 135440.0,
+    "ytdly": 142830.0
+   },
+   "ebitda": {
+    "p03": 14975.0,
+    "p04": 4414.0,
+    "p05": 2300.0,
+    "p06": 16428.0,
+    "p06pct": 0.238,
+    "p06ly": 10922.0,
+    "ytd": 50120.0,
+    "ytdly": 44345.0
+   }
+  },
+  "trend": {
+   "flag": null,
+   "dm": "Ebony Simmons",
+   "weeks": [
+    "P06WK4",
+    "P07WK1",
+    "P07WK2",
+    "P07WK3"
+   ],
+   "salesGrowth": [
+    -0.0622,
+    -0.1069,
+    -0.112,
+    -0.0141
+   ],
+   "txnGrowth": [
+    -0.0778,
+    -0.079,
+    -0.0539,
+    0.0127
+   ]
+  },
+  "smgWeek": {
+   "win": 40.0,
+   "count": 25
+  },
+  "smgPtd": {
+   "win": 40.0,
+   "count": 10
+  },
+  "cdr": {
+   "avgOtd": 17.864,
+   "otdU18": 0.586,
+   "del30": 0.503,
+   "del45": 0.084,
+   "promise": 0.786
+  },
+  "scorecard": {
+   "salesGrowth": -0.0389,
+   "salesScore": 1.0,
+   "otd": 16.1606,
+   "otdScore": 4.0,
+   "win": 0.434,
+   "winScore": 2.0,
+   "profitGrowth": 5516.39,
+   "profitScore": 5.0,
+   "retention": 0.8333,
+   "retentionScore": 3.0
+  },
+  "hutbot": {
+   "onTime": 97.2,
+   "late": 2.4,
+   "missed": 0.4
+  },
+  "gmRoutine": {
+   "onTime": 94.5,
+   "late": 4.7,
+   "missed": 0.8
+  },
+  "comments": [
+   {
+    "date": "Jul 08",
+    "source": "Social",
+    "rating": 4,
+    "osat": null,
+    "text": "Always Fresh and Fast!l"
+   },
+   {
+    "date": "Jul 07",
+    "source": "GES",
+    "rating": null,
+    "osat": 5,
+    "text": "I didn’t have any interaction with the staff, in my opinion the pizza was a little pricey and I don’t agree with the delivery charges when it doesn’t go to the driver"
+   },
+   {
+    "date": "Jul 07",
+    "source": "GES",
+    "rating": null,
+    "osat": 2,
+    "text": "Food was soggy to much tomato sauce"
+   },
+   {
+    "date": "Jul 06",
+    "source": "GES",
+    "rating": null,
+    "osat": 1,
+    "text": "This was by far the worst experience I have ever had ordering from your restaurant. The pizza arrived cold and was not fully cooked, making it inedible. My wings were completely left out of the order, and the driver had to waste time going back to get them. Even after that, I sti"
+   },
+   {
+    "date": "Jun 30",
+    "source": "GES",
+    "rating": null,
+    "osat": 2,
+    "text": "Ordered 3 melts 2 pepperoni and 1 chicken. When I got there to pick up my order I was informed that they only had 2 melts left so they gave me 1 of each melt"
+   },
+   {
+    "date": "Jun 25",
+    "source": "GES",
+    "rating": null,
+    "osat": 5,
+    "text": "I’ve loved the pan pizza since I was a teen. Loved it for many years."
+   },
+   {
+    "date": "Jun 16",
+    "source": "GES",
+    "rating": null,
+    "osat": 5,
+    "text": "Overall it was great but I opened my own box to check my pizza but I will definitely order again."
+   },
+   {
+    "date": "Jun 15",
+    "source": "GES",
+    "rating": null,
+    "osat": 2,
+    "text": "Big New Yorker had undercooked crust and rubbery texture. Pan pizza and breadsticks were good."
+   }
+  ],
+  "commentCount": 35
+ }
+};
+const fsData = {
+  '39412': {
+    evalDate:'Feb 17, 2026', evalType:'Evaluation', specialist:'Clayton Odom',
+    score:9, prevScore:9, prevRating:'At Standard', rating:'At Standard', sigCount:0, secCount:9, repeats:7,
+    scoreHistory:[{d:'Apr 16',s:8},{d:'Aug 19',s:9},{d:'Nov 5',s:7},{d:'Jan 13',s:9},{d:'Feb 17',s:9}],
+    bestPractices:['Thermometer calibration properly verified','Temperature logs properly used and maintained','Hair restraints worn properly'],
+    deviations:[
+      {code:'1.03',text:'BOH hand sinks not properly stocked — dispenser empty',repeat:true},
+      {code:'5.01',text:'Food/packaging stored under dripping condensation',repeat:true},
+      {code:'5.02',text:'Utensils chipped/cracked — 5 items impacted',repeat:true},
+      {code:'5.03',text:'Chemicals stored on floor/countertops — cross-contamination risk',repeat:true},
+      {code:'5.07',text:'Crusted food debris on equipment interior; grease/dust on fan guards',repeat:true},
+    ],
+  },
+  '39413': { evalDate:'N/A', evalType:'—', specialist:'—', score:null, prevScore:null, prevRating:null, rating:'No Eval on File', sigCount:null, secCount:null, repeats:null, scoreHistory:[], bestPractices:[], deviations:[] },
+  '39414': { evalDate:'N/A', evalType:'—', specialist:'—', score:null, prevScore:null, prevRating:null, rating:'No Eval on File', sigCount:null, secCount:null, repeats:null, scoreHistory:[], bestPractices:[], deviations:[] },
+  '39415': {
+    evalDate:'Feb 19, 2026', evalType:'Re-Evaluation', specialist:'Clayton Odom',
+    score:3, prevScore:8, prevRating:'Underperforming', rating:'At Standard', sigCount:0, secCount:3, repeats:2,
+    scoreHistory:[{d:'May 3',s:4},{d:'Jul 23',s:7},{d:'Mar 11',s:11},{d:'Apr 15',s:8},{d:'Nov 23',s:6},{d:'Jan 14',s:8},{d:'Feb 19',s:3}],
+    bestPractices:['Proper chemical storage — no contamination risk','Team members washing hands correctly','Hair restraints worn properly'],
+    deviations:[
+      {code:'5.06',text:'Test strips expired — 11/01/2025 and 02/15/2026',repeat:true},
+      {code:'5.10',text:'BOH shelving not clean — grease and dust build-up',repeat:true},
+      {code:'6.04',text:'BOH floors not in good repair — missing pieces',repeat:false},
+    ],
+  },
+  '39416': {
+    evalDate:'May 19, 2026', evalType:'Evaluation', specialist:'Clay Odom',
+    score:7, prevScore:7, prevRating:'At Standard', rating:'At Standard', sigCount:0, secCount:7, repeats:3,
+    scoreHistory:[{d:'Jun 13',s:3},{d:'Oct 27',s:7},{d:'Nov 23',s:5},{d:'Jan 4',s:7},{d:'May 19',s:7}],
+    bestPractices:['No Significant violations across all visits','Consistent At Standard rating'],
+    deviations:[
+      {code:'5.01',text:'Food/packaging not stored inverted or under dripping condensation',repeat:true},
+      {code:'5.04',text:'Team member beverages observed in food-handling areas',repeat:false},
+      {code:'5.07',text:'Food debris on fan guards — maketable and equipment',repeat:true},
+      {code:'6.01',text:'Weekly pest walk not completed/retained',repeat:true},
+      {code:'7.06',text:'Non-approved equipment/smallwares in use',repeat:false},
+    ],
+  },
+  '39430': {
+    evalDate:'Mar 2, 2026', evalType:'Re-Evaluation', specialist:'Clay Odom',
+    score:9, prevScore:9, prevRating:'Underperforming', rating:'At Standard', sigCount:0, secCount:9, repeats:5,
+    scoreHistory:[{d:'Jul 26',s:2},{d:'Mar 11',s:8},{d:'Sep 3',s:11},{d:'Oct 29',s:7},{d:'Nov 25',s:7},{d:'Jan 13',s:9},{d:'Mar 2',s:9}],
+    bestPractices:['Team members properly washing hands','Temperature logs properly used','Hair restraints worn properly'],
+    deviations:[
+      {code:'2.04',text:'Hot holding equipment temp does not meet brand standard',repeat:true},
+      {code:'2.07',text:'Frozen foods stacked while thawing — improper procedure',repeat:true},
+      {code:'5.01',text:'Food/packaging stored under dripping condensation',repeat:true},
+      {code:'5.02',text:'Melted utensil (1); utensils with dust build-up (1)',repeat:true},
+      {code:'5.07',text:'Grease on fan guards; soil on walk-in door; grease on oven buttons',repeat:false},
+    ],
+  },
+  '39529': {
+    evalDate:'Mar 17, 2026', evalType:'Re-Evaluation', specialist:'Clay Odom',
+    score:9, prevScore:10, prevRating:'Underperforming', rating:'At Standard', sigCount:0, secCount:9, repeats:6,
+    scoreHistory:[{d:'Sep 24',s:6},{d:'Mar 12',s:9},{d:'Apr 16',s:6},{d:'Oct 27',s:8},{d:'Jan 4',s:10},{d:'Feb 3',s:10},{d:'Mar 17',s:9}],
+    bestPractices:['Proper chemical storage','Temperature logs properly used','Hair restraints worn properly'],
+    deviations:[
+      {code:'2.04',text:'Hot holding equipment temp does not meet brand standard',repeat:true},
+      {code:'2.07',text:'Frozen ingredients not thawed prior to use',repeat:true},
+      {code:'5.02',text:'Items stored unclean (sticker residue, 3 items); chipped utensils (3 items)',repeat:true},
+      {code:'5.08',text:'Sanitizer buckets at 0 ppm — not at proper concentration',repeat:true},
+    ],
+  },
+  '42659': {
+    evalDate:'Feb 19, 2026', evalType:'Re-Evaluation', specialist:'Clay Odom',
+    score:3, prevScore:9, prevRating:'Underperforming', rating:'At Standard', sigCount:0, secCount:3, repeats:2,
+    scoreHistory:[{d:'Jan 14',s:9},{d:'Feb 19',s:3}],
+    bestPractices:['Hair restraints worn properly','Team members washing hands correctly','Thermometer calibration properly verified'],
+    deviations:[
+      {code:'1.03',text:'BOH hand sink not properly stocked — dispenser empty',repeat:true},
+      {code:'5.01',text:'Food/packaging stored under dripping condensation',repeat:true},
+      {code:'7.10',text:'Restroom cleaner accessible to customers — stored on back of toilet',repeat:false},
+    ],
+  },
+
+  '39522': {
+    evalDate:'Jun 24, 2026', evalType:'Evaluation', specialist:'Damien Burr',
+    score:9, prevScore:4, prevRating:'At Standard', rating:'At Standard', sigCount:0, secCount:9, repeats:2,
+    scoreHistory:[{d:'Feb 8',s:3},{d:'Oct 15',s:7},{d:'Mar 13',s:6},{d:'Nov 13',s:4},{d:'Jun 24',s:9}],
+    bestPractices:['Thermometer calibration properly verified','Hair restraints worn properly'],
+    deviations:[
+      {code:'1.04',text:'Warm water not available at prep-area hand sink — 78\u00b0F observed',repeat:false},
+      {code:'5.01',text:'Sausage & pepperoni cases on walk-in freezer floor; dough not covered; pizza boxes not inverted (cut table, office)',repeat:false},
+      {code:'5.06',text:'Sanitizer test strips expired 03/01/2025',repeat:false},
+      {code:'5.07',text:'REPEAT: 3-comp sink grease; dish machine scale/organic buildup; oven debris; fan guards dusty',repeat:true},
+      {code:'5.08',text:'Quat sanitizer 0 ppm at 4 stations (fryers, maketable, cut table, front counter)',repeat:false},
+      {code:'5.09',text:'Mop sink & dustpans dirty; brooms unusable',repeat:false},
+      {code:'5.10',text:'REPEAT: BOH walls/shelving grease & soil buildup (dish, prep)',repeat:true},
+      {code:'5.11',text:'Light shield missing over food in walk-in freezer',repeat:false},
+      {code:'7.14',text:'Drain covers missing — dish area (Imminent Health Hazard category)',repeat:false},
+    ],
+  },
+
+};
+const coreData = {
+  '39412': {
+    evalDate:'Feb 17, 2026', evalType:'Evaluation', specialist:'Clayton Odom', manager:'Dawn Lee',
+    score:21, prevScore:8, prevRating:'Marginal', rating:'Breakdown', critCount:2, majCount:6, minCount:3, repeats:1,
+    reeval:{date:'Apr 28, 2026', score:10, rating:'Marginal', critCount:1, majCount:2, minCount:3, repeats:4, manager:'Donetta Cole',
+      deviations:[
+        {code:'OP.3',level:'Critical',text:'REPEAT: Ice build-up slip hazard on walk-in freezer floor; floor panel lifting — trip hazard',repeat:true},
+        {code:'EX301',level:'Major',text:'REPEAT: Exterior wall cracked/missing pieces/soiled; gutters missing pieces',repeat:true},
+        {code:'FC201',level:'Major',text:'Menuboard panel black screen — not functioning',repeat:false},
+        {code:'DR303',level:'Minor',text:'Hole in dining room wall',repeat:false},
+        {code:'DR309',level:'Minor',text:'REPEAT: Ceiling vent soil build-up; water stains near front door',repeat:true},
+        {code:'RR303',level:'Minor',text:'REPEAT: Men\'s restroom ceiling discoloration',repeat:true},
+      ]
+    },
+    bestPractices:['Orders accurate and fulfilled to customer specs','Wings and sides met quality standards'],
+    deviations:[
+      {code:'FQ103a',level:'Critical',text:'Dough not properly proofed/tempered — 5 issues; MRD "made" date same as observation date',repeat:false},
+      {code:'OP.3',level:'Critical',text:'REPEAT: Walk-in freezer wall unsecured; excessive ice build-up slip hazard on floor',repeat:true},
+      {code:'DR205',level:'Major',text:'Chair in dining room — soil build-up',repeat:false},
+      {code:'DR207',level:'Major',text:'Beverage machine out of order',repeat:false},
+      {code:'EX201',level:'Major',text:'Damaged entrance sign — location responsible',repeat:false},
+      {code:'EX301',level:'Major',text:'Awning soiled; location responsible',repeat:false},
+      {code:'FQ101b',level:'Major',text:'Pan crust color too light — did not meet standard',repeat:false},
+      {code:'RR203',level:'Major',text:'REPEAT: Men\'s restroom mirror desilvering',repeat:true},
+      {code:'DR309',level:'Minor',text:'Ceiling water stains near front door',repeat:false},
+      {code:'EX303',level:'Minor',text:'Building light covers missing around building',repeat:false},
+      {code:'RR303',level:'Minor',text:'Hole in men\'s restroom ceiling',repeat:false},
+    ],
+    scoreHistory:[{d:'Feb 17',s:21,r:'Breakdown'},{d:'Apr 28',s:10,r:'Marginal'}],
+  },
+  '39413': { evalDate:'N/A', evalType:'—', specialist:'—', manager:'—', score:null, prevScore:null, prevRating:null, rating:'No Eval on File', critCount:null, majCount:null, minCount:null, repeats:null, reeval:null, bestPractices:[], deviations:[], scoreHistory:[] },
+  '39414': { evalDate:'N/A', evalType:'—', specialist:'—', manager:'—', score:null, prevScore:null, prevRating:null, rating:'No Eval on File', critCount:null, majCount:null, minCount:null, repeats:null, reeval:null, bestPractices:[], deviations:[], scoreHistory:[] },
+  '39415': {
+    evalDate:'Jan 14, 2026', evalType:'Evaluation', specialist:'Clayton Odom', manager:'Sarah Roberts',
+    score:8, prevScore:3, prevRating:'At Standard', rating:'Marginal', critCount:1, majCount:2, minCount:1, repeats:2,
+    reeval:null,
+    bestPractices:['Orders accurate and fulfilled to customer specs','Wings and sides met quality standards'],
+    deviations:[
+      {code:'FQ101a',level:'Critical',text:'Missing bell pepper topping on one or more slices — hand-tossed pizza',repeat:false},
+      {code:'BOH.1',level:'Major',text:'Fryer not operational; walk-in cooler glass door handle broken',repeat:true},
+      {code:'FQ101b',level:'Major',text:'REPEAT: Hand tossed crust color too light',repeat:true},
+      {code:'DR307',level:'Minor',text:'REPEAT: Door tape residue — cleanliness issue',repeat:true},
+    ],
+    scoreHistory:[{d:'Jan 14',s:8,r:'Marginal'}],
+  },
+  '39416': {
+    evalDate:'May 19, 2026', evalType:'Evaluation', specialist:'Clay Odom', manager:'Robert Lowd',
+    score:9, prevScore:2, prevRating:'At Standard', rating:'Marginal', critCount:1, majCount:3, minCount:0, repeats:1,
+    reeval:null,
+    bestPractices:['Dough properly proofed and tempered','Orders accurate and fulfilled to customer specs','Wings and sides met quality standards'],
+    deviations:[
+      {code:'FQ101a',level:'Critical',text:'Cheese does not cover sauce at crust edge — thin crust pizza',repeat:false},
+      {code:'BOH.1',level:'Major',text:'Walk-in cooler glass door handles cracked',repeat:true},
+      {code:'FQ203',level:'Major',text:'Expired parmesan (grated) — manufacturer date expired, non-TCS ingredient',repeat:false},
+      {code:'RR203',level:'Major',text:'Mirror in unisex restroom — soap residue',repeat:false},
+    ],
+    scoreHistory:[{d:'May 19',s:9,r:'Marginal'}],
+  },
+  '39430': {
+    evalDate:'Jan 13, 2026', evalType:'Evaluation', specialist:'Clayton Odom', manager:'Brandon Seeley',
+    score:9, prevScore:5, prevRating:'At Standard', rating:'Marginal', critCount:1, majCount:2, minCount:2, repeats:3,
+    reeval:null,
+    bestPractices:['Orders accurate to customer specs','Pizzas met quality appearance standards','Wings and sides met quality standards'],
+    deviations:[
+      {code:'OP.3',level:'Critical',text:'Ice build-up on walk-in freezer floor — slip hazard',repeat:false},
+      {code:'BOH.1',level:'Major',text:'REPEAT: Walk-in cooler cracked handles; oven deck not functioning (only 1 of 2 operational)',repeat:true},
+      {code:'FQ203',level:'Major',text:'REPEAT: Hand-tossed dough with expired restaurant-placed label',repeat:true},
+      {code:'DR309',level:'Minor',text:'Dust build-up on 2 ceiling vents above hot holding cabinet',repeat:false},
+      {code:'GI308',level:'Minor',text:'REPEAT: Team members in non-slip-resistant shoes / shoes without secure backs',repeat:true},
+    ],
+    scoreHistory:[{d:'Jan 13',s:9,r:'Marginal'}],
+  },
+  '39529': {
+    evalDate:'Feb 3, 2026', evalType:'Evaluation', specialist:'Clayton Odom', manager:'Dylan Noyce',
+    score:10, prevScore:8, prevRating:'Marginal', rating:'Marginal', critCount:0, majCount:4, minCount:2, repeats:3,
+    reeval:null,
+    bestPractices:['Dough properly proofed and tempered','Wings and sides met quality standards'],
+    deviations:[
+      {code:'BOH.1',level:'Major',text:'Oven deck not functioning (1 of 2 only); walk-in cooler glass door handles cracked',repeat:false},
+      {code:'FQ101b',level:'Major',text:'REPEAT: Stuffed crust — 3+ cheese blowouts',repeat:true},
+      {code:'FQ201a',level:'Major',text:'Tomatoes at 32°F — cold holding temperature issue',repeat:false},
+      {code:'FQ203',level:'Major',text:'REPEAT: Opened parmesan missing restaurant-placed label where required',repeat:true},
+      {code:'DR309',level:'Minor',text:'Water stains on 4 ceiling tiles throughout dining room',repeat:false},
+      {code:'RR303',level:'Minor',text:'REPEAT: Dust build-up on men\'s restroom vent',repeat:true},
+    ],
+    scoreHistory:[{d:'Feb 3',s:10,r:'Marginal'}],
+  },
+  '42659': {
+    evalDate:'Jan 14, 2026', evalType:'Evaluation', specialist:'Clayton Odom', manager:'Andrae Taylor',
+    score:4, prevScore:null, prevRating:null, rating:'Marginal', critCount:1, majCount:0, minCount:1, repeats:0,
+    reeval:null,
+    bestPractices:['Pizzas met quality standards for appearance','Wings and sides met quality standards'],
+    deviations:[
+      {code:'AC103',level:'Critical',text:'Large thin crust dough not available — key menu item out of stock',repeat:false},
+      {code:'EX303',level:'Minor',text:'Building lights not working — both sides of main entrance door',repeat:false},
+    ],
+    scoreHistory:[{d:'Jan 14',s:4,r:'Marginal'}],
+  },
+};
+const fsSystemic = [
+  {code:'5.01', label:'Food under dripping condensation', stores:['39412','39430','39415','42659','39416']},
+  {code:'5.02', label:'Chipped/dirty utensils', stores:['39412','39430','39529']},
+  {code:'5.07', label:'Equipment debris/fan guards dirty', stores:['39412','39430','39416','39529']},
+  {code:'2.04/07', label:'Hot holding & thaw temps', stores:['39430','39529']},
+  {code:'1.03', label:'Hand sink not stocked', stores:['39412','42659']},
+];
+
+const DAYS = [
+  {key:'Tue Jul 14', title:'Tuesday July 14', sub:'ATL Airport → 4 Stores → Travel to Florida',
+   pre:[{t:'~9:30 AM', x:'Arrival — Hartsfield-Jackson Atlanta Airport (ATL)'}],
+   post:[{t:'~4:15 PM', x:'Travel to Fort Walton Beach / Destin FL (~5 hrs)'},{t:'~9:15 PM', x:'Hotel check-in — Fort Walton Beach / Destin area'}]},
+  {key:'Wed Jul 15', title:'Wednesday July 15', sub:'Florida Panhandle — 4 Stores',
+   pre:[], post:[{t:'6:00–7:30 PM', x:'Dinner'}]},
+  {key:'Thu Jul 16', title:'Thursday July 16', sub:'East Panhandle — 3 Stores + Travel Back to Atlanta',
+   pre:[], post:[{t:'~3:30 PM', x:'Travel back to Atlanta (~5 hrs)'},{t:'~8:30–9:00 PM', x:'Hotel check-in — near Stockbridge / Ellenwood'}]},
+  {key:'Fri Jul 17', title:'Friday July 17', sub:'ATL South — 2 Stores, Then Airport',
+   pre:[], post:[{t:'~2:15–2:30 PM', x:'Departure — Hartsfield-Jackson Atlanta Airport (ATL)'}]},
+];
+
+const ORDER = Object.keys(DATA).sort((a,b)=>DATA[a].itin.order - DATA[b].itin.order);
+
+// ---------- helpers ----------
+const fmt = {
+  pct: (v,d=1) => v==null ? '—' : (v*100).toFixed(d)+'%',
+  pctRaw: (v,d=1) => v==null ? '—' : v.toFixed(d)+'%',
+  gr: v => v==null ? '—' : (v>=0?'+':'')+(v*100).toFixed(1)+'%',
+  money: v => v==null ? '—' : (v<0?'-$':'$')+Math.abs(Math.round(v)).toLocaleString(),
+  min: v => v==null ? '—' : v.toFixed(1),
+};
+const cls = {
+  gr: v => v==null?'m':(v>=0?'g':(v>=-0.03?'y':'r')),
+  win: v => v==null?'m':(v>=65?'g':(v>=50?'y':'r')),
+  otdMin: v => v==null?'m':(v<=18?'g':(v<=21?'y':'r')),
+  hb: v => v==null?'m':(v>=95?'g':(v>=90?'y':'r')),
+  ebitda: v => v==null?'m':(v>0?'g':'r'),
+  score5: v => v==null?'m':(v>=4?'g':(v>=3?'y':'r')),
+};
+function fsccPill(s){
+  const f = fsData[s];
+  if(!f || f.score==null) return s==='39522' ? '' : '<span class="pill m">No eval</span>';
+  const c = f.rating==='At Standard' ? 'g' : (f.rating==='Underperforming' ? 'o':'r');
+  return `<span class="pill ${c}">${f.score} · ${f.rating}</span>`;
+}
+function corePill(s){
+  const c = coreData[s];
+  if(!c || c.score==null) return '<span class="pill m">No eval</span>';
+  const eff = c.reeval || c;
+  const cl = eff.rating==='Breakdown' ? 'r' : (eff.rating==='Marginal' ? 'o' : 'g');
+  return `<span class="pill ${cl}">${eff.score} · ${eff.rating}</span>`;
+}
+
+// ---------- tabs ----------
+const TABS = [{id:'ov', label:'Overview'}].concat(DAYS.map((d,i)=>({id:'d'+i, label:d.key, cnt:ORDER.filter(s=>DATA[s].itin.day===d.key).length})));
+let cur = 'ov';
+function renderTabs(){
+  document.getElementById('tabs').innerHTML = TABS.map(t =>
+    `<button class="tab ${cur===t.id?'active':''}" onclick="setTab('${t.id}')">${t.label}${t.cnt?`<span class="cnt">${t.cnt} stores</span>`:''}</button>`).join('');
+}
+function setTab(id){ cur = id; renderTabs(); renderView(); window.scrollTo(0,0); }
+
+// ---------- overview ----------
+function renderOverview(){
+  const cautions = ORDER.filter(s=>DATA[s].trend && DATA[s].trend.flag);
+  const avg = arr => { const v = arr.filter(x=>x!=null); return v.length? v.reduce((a,b)=>a+b,0)/v.length : null; };
+  const winAvg = avg(ORDER.map(s=>DATA[s].smgPtd?.win));
+  const hbAvg = avg(ORDER.map(s=>DATA[s].hutbot?.onTime));
+  const ebT = ORDER.reduce((a,s)=>a+(DATA[s].pl?.ebitda?.p06||0),0);
+
+  let h = `<div class="kpis">
+    <div class="kpi"><div class="v">13</div><div class="l">Stores · 4 Days</div></div>
+    <div class="kpi"><div class="v ${cautions.length? 'y':'g'}">${cautions.length}</div><div class="l">Caution-flag stores</div></div>
+    <div class="kpi"><div class="v ${cls.win(winAvg)}">${winAvg?winAvg.toFixed(1):'—'}</div><div class="l">Avg WIN P7 (13 stores)</div></div>
+    <div class="kpi"><div class="v ${cls.hb(hbAvg)}">${hbAvg?hbAvg.toFixed(1)+'%':'—'}</div><div class="l">Avg HutBot on-time</div></div>
+    <div class="kpi"><div class="v ${ebT>0?'g':'r'}">${fmt.money(ebT)}</div><div class="l">Combined P6 EBITDA</div></div>
+  </div>`;
+
+  if(cautions.length){
+    h += `<div class="panel"><div class="panel-h">Trending Caution Flags — P7W3</div><div class="panel-b" style="font-size:13px">` +
+      cautions.map(s=>`<b>${DATA[s].itin.label} ${s}</b> (${DATA[s].trend.dm}) — sales ${fmt.gr(DATA[s].trend.salesGrowth[3])}, transactions ${fmt.gr(DATA[s].trend.txnGrowth[3])} latest week`).join(' &nbsp;·&nbsp; ') + `</div></div>`;
+  }
+
+  h += `<div class="panel"><div class="panel-h">Systemic FSCC Patterns — Florida Area (multi-store repeats)</div><div class="panel-b">` +
+    fsSystemic.map(p=>`<div class="dev"><span class="code">${p.code}</span><span>${p.label}</span><span class="m">${p.stores.length} stores: ${p.stores.join(', ')}</span></div>`).join('') + `</div></div>`;
+
+  h += `<div class="panel"><div class="panel-h">Visit Roster — All 13 Stores</div><div class="panel-b" style="overflow-x:auto">
+  <table class="roster"><thead><tr>
+    <th>Time</th><th>Store</th><th>DM</th><th>GM</th><th>WIN P7</th><th>OTD wk (min)</th><th>HutBot OT%</th><th>Sales gr (P7W3)</th><th>P6 EBITDA</th><th>FSCC</th><th>CORE</th>
+  </tr></thead><tbody>`;
+  let lastDay = '';
+  for(const s of ORDER){
+    const d = DATA[s];
+    if(d.itin.day !== lastDay){ lastDay = d.itin.day; h += `<tr class="dayhdr"><td colspan="11">${DAYS.find(x=>x.key===lastDay).title}</td></tr>`; }
+    const flag = d.trend?.flag ? ' <span class="pill y">Caution</span>' : '';
+    h += `<tr class="srow" onclick="openStore('${s}')">
+      <td class="m">${d.itin.time}</td>
+      <td><b>${d.itin.label}</b> <span class="m">${s}</span>${flag}</td>
+      <td>${d.trend?.dm||''}</td>
+      <td>${d.info?.gm||''}</td>
+      <td class="num ${cls.win(d.smgPtd?.win)}">${d.smgPtd?d.smgPtd.win.toFixed(1):'—'}</td>
+      <td class="num ${cls.otdMin(d.cdr?.avgOtd)}">${fmt.min(d.cdr?.avgOtd)}</td>
+      <td class="num ${cls.hb(d.hutbot?.onTime)}">${d.hutbot?d.hutbot.onTime.toFixed(1)+'%':'—'}</td>
+      <td class="num ${cls.gr(d.trend?.salesGrowth[3])}">${fmt.gr(d.trend?.salesGrowth[3])}</td>
+      <td class="num ${cls.ebitda(d.pl?.ebitda?.p06)}">${fmt.money(d.pl?.ebitda?.p06)}</td>
+      <td>${fsccPill(s)}</td><td>${corePill(s)}</td></tr>`;
+  }
+  h += `</tbody></table></div></div>`;
+  return h;
+}
+
+// ---------- day view ----------
+function renderDay(i){
+  const day = DAYS[i];
+  const stores = ORDER.filter(s=>DATA[s].itin.day===day.key);
+  let h = `<div class="panel"><div class="panel-h">${day.title} <span style="color:var(--text-muted);font-weight:400">${day.sub}</span></div></div>`;
+  day.pre.forEach(p => h += `<div class="leg">${p.t} — ${p.x}</div>`);
+  for(const s of stores){
+    const d = DATA[s];
+    h += `<div class="scard" onclick="openStore('${s}')">
+      <div class="time">${d.itin.time}</div>
+      <div><div class="nm">${d.itin.label} <span class="m" style="font-size:14px">#0${s}</span></div>
+        <div class="addr">${d.info.address}, ${d.info.city} ${d.info.state} · GM: ${d.info.gm} · DM: ${d.trend.dm}</div></div>
+      <div class="mini">
+        <div class="mi"><div class="v ${cls.win(d.smgPtd?.win)}">${d.smgPtd?d.smgPtd.win.toFixed(1):'—'}</div><div class="l">WIN P7</div></div>
+        <div class="mi"><div class="v ${cls.otdMin(d.cdr?.avgOtd)}">${fmt.min(d.cdr?.avgOtd)}</div><div class="l">OTD min</div></div>
+        <div class="mi"><div class="v ${cls.hb(d.hutbot?.onTime)}">${d.hutbot?d.hutbot.onTime.toFixed(0)+'%':'—'}</div><div class="l">HutBot</div></div>
+        <div class="mi"><div class="v ${cls.gr(d.trend?.salesGrowth[3])}">${fmt.gr(d.trend?.salesGrowth[3])}</div><div class="l">Sales wk</div></div>
+        <div class="mi"><div class="v ${cls.ebitda(d.pl?.ebitda?.p06)}">${fmt.money(d.pl?.ebitda?.p06)}</div><div class="l">P6 EBITDA</div></div>
+      </div>
+      <div class="go">›</div>
+    </div>`;
+  }
+  day.post.forEach(p => h += `<div class="leg">${p.t} — ${p.x}</div>`);
+  return h;
+}
+
+function renderView(){
+  const v = document.getElementById('view');
+  v.innerHTML = cur==='ov' ? renderOverview() : renderDay(parseInt(cur.slice(1)));
+}
+
+// ---------- store detail ----------
+function bar(v, max, color){
+  const hpx = v==null?2:Math.max(3, Math.abs(v)/max*70);
+  return `<div class="bgroup"><div class="bv ${v>=0?'g':'r'}">${fmt.gr(v)}</div><div class="bar" style="height:${hpx}px;background:${color}"></div></div>`;
+}
+function openStore(s){
+  const d = DATA[s];
+  const f = fsData[s], c = coreData[s];
+  const sc = d.scorecard || {};
+  let h = `<div class="dhead"><div>
+      <h2>${d.itin.label} <span class="m" style="font-size:18px">#0${s}</span> ${d.trend?.flag?'<span class="pill y">Trending Caution</span>':''}</h2>
+      <div class="sub">${d.itin.day} · ${d.itin.time} &nbsp;|&nbsp; ${d.info.address}, ${d.info.city}, ${d.info.state} ${d.info.zip} &nbsp;|&nbsp; ${d.info.subconcept}</div>
+      <div class="sub">GM: <b>${d.info.gm}</b> (${d.info.gmPhone}) · DM: <b>${d.trend.dm}</b> · Store: ${d.info.phone}</div>
+    </div><button class="xbtn" onclick="closeStore()">✕</button></div><div class="dgrid">`;
+
+  // P6 scorecard
+  h += `<div class="panel full" style="margin:0"><div class="panel-h">P6 Balanced Scorecard</div><div class="panel-b"><div class="kv">
+    <div class="it"><div class="v ${cls.gr(sc.salesGrowth)}">${fmt.gr(sc.salesGrowth)}</div><div class="l">Sales Growth</div><div class="s">score ${sc.salesScore??'—'}</div></div>
+    <div class="it"><div class="v ${cls.otdMin(sc.otd)}">${fmt.min(sc.otd)}</div><div class="l">OTD Minutes</div><div class="s">score ${sc.otdScore??'—'}</div></div>
+    <div class="it"><div class="v ${cls.win(sc.win!=null?sc.win*100:null)}">${sc.win!=null?(sc.win*100).toFixed(1):'—'}</div><div class="l">SMG Win</div><div class="s">score ${sc.winScore??'—'}</div></div>
+    <div class="it"><div class="v ${sc.profitGrowth>0?'g':'r'}">${fmt.money(sc.profitGrowth)}</div><div class="l">Profit Growth</div><div class="s">score ${sc.profitScore??'—'}</div></div>
+    <div class="it"><div class="v ${sc.retention>=0.75?'g':(sc.retention>=0.6?'y':'r')}">${fmt.pct(sc.retention,0)}</div><div class="l">Team Retention</div><div class="s">score ${sc.retentionScore??'—'}</div></div>
+    <div class="it"><div class="v ${cls.win(d.smgPtd?.win)}">${d.smgPtd?d.smgPtd.win.toFixed(1):'—'}</div><div class="l">WIN P7 PTD</div><div class="s">${d.smgPtd?.count??0} surveys</div></div>
+  </div></div></div>`;
+
+  // Weekly trend
+  const t = d.trend;
+  h += `<div class="panel" style="margin:0"><div class="panel-h">Weekly Trend — Sales Growth</div><div class="panel-b"><div class="bars">` +
+    t.salesGrowth.map((v,i)=>`<div class="bgroup"><div class="bv ${v>=0?'g':'r'}">${fmt.gr(v)}</div><div class="bar" style="height:${v==null?2:Math.max(3,Math.abs(v)*260)}px;background:${v>=0?'var(--green)':'var(--red)'}"></div><div class="bl">${t.weeks[i]}</div></div>`).join('') +
+    `</div></div></div>`;
+  h += `<div class="panel" style="margin:0"><div class="panel-h">Weekly Trend — Transactions</div><div class="panel-b"><div class="bars">` +
+    t.txnGrowth.map((v,i)=>`<div class="bgroup"><div class="bv ${v>=0?'g':'r'}">${fmt.gr(v)}</div><div class="bar" style="height:${v==null?2:Math.max(3,Math.abs(v)*260)}px;background:${v>=0?'var(--green)':'var(--red)'}"></div><div class="bl">${t.weeks[i]}</div></div>`).join('') +
+    `</div></div></div>`;
+
+  // P&L
+  const pl = d.pl;
+  const ns = pl.netSales, eb = pl.ebitda, lab = pl.laborTotal, cos = pl.cos;
+  h += `<div class="panel" style="margin:0"><div class="panel-h">P&amp;L — P6-26 Final</div><div class="panel-b">
+    <table class="roster"><thead><tr><th></th><th>P03</th><th>P04</th><th>P05</th><th>P06</th><th>P06 LY</th></tr></thead><tbody>
+    <tr><td>Net Sales</td><td class="num">${fmt.money(ns?.p03)}</td><td class="num">${fmt.money(ns?.p04)}</td><td class="num">${fmt.money(ns?.p05)}</td><td class="num"><b>${fmt.money(ns?.p06)}</b></td><td class="num m">${fmt.money(ns?.p06ly)}</td></tr>
+    <tr><td>EBITDA</td><td class="num ${cls.ebitda(eb?.p03)}">${fmt.money(eb?.p03)}</td><td class="num ${cls.ebitda(eb?.p04)}">${fmt.money(eb?.p04)}</td><td class="num ${cls.ebitda(eb?.p05)}">${fmt.money(eb?.p05)}</td><td class="num ${cls.ebitda(eb?.p06)}"><b>${fmt.money(eb?.p06)}</b> (${fmt.pct(eb?.p06pct)})</td><td class="num m">${fmt.money(eb?.p06ly)}</td></tr>
+    <tr><td>Labor</td><td class="num" colspan="3"></td><td class="num">${fmt.money(lab?.p06)} (${fmt.pct(lab?.p06pct)})</td><td class="num m">${fmt.money(lab?.p06ly)}</td></tr>
+    <tr><td>Cost of Food Sales</td><td class="num" colspan="3"></td><td class="num">${fmt.money(cos?.p06)} (${fmt.pct(cos?.p06pct)})</td><td class="num m">${fmt.money(cos?.p06ly)}</td></tr>
+    <tr><td>YTD EBITDA</td><td class="num ${cls.ebitda(eb?.ytd)}" colspan="3">${fmt.money(eb?.ytd)}</td><td class="num m" colspan="2">LY: ${fmt.money(eb?.ytdly)}</td></tr>
+    </tbody></table></div></div>`;
+
+  // Delivery
+  const cd = d.cdr || {};
+  h += `<div class="panel" style="margin:0"><div class="panel-h">Delivery — Latest Week (CDR)</div><div class="panel-b"><div class="kv">
+    <div class="it"><div class="v ${cls.otdMin(cd.avgOtd)}">${fmt.min(cd.avgOtd)}</div><div class="l">Avg OTD (min)</div></div>
+    <div class="it"><div class="v">${fmt.pct(cd.otdU18)}</div><div class="l">OTD &lt; 18 min</div></div>
+    <div class="it"><div class="v">${fmt.pct(cd.del30)}</div><div class="l">Deliveries &lt; 30</div></div>
+    <div class="it"><div class="v ${cd.del45>0.1?'r':'g'}">${fmt.pct(cd.del45)}</div><div class="l">Deliveries &gt; 45</div></div>
+    <div class="it"><div class="v">${fmt.pct(cd.promise)}</div><div class="l">Promise Accuracy</div></div>
+  </div></div></div>`;
+
+  // HutBot
+  const hb = d.hutbot, gr = d.gmRoutine;
+  h += `<div class="panel" style="margin:0"><div class="panel-h">HutBot Routine Compliance</div><div class="panel-b">
+    <div style="font-size:12px;color:var(--text-muted)">Store — On-time ${fmt.pctRaw(hb?.onTime)} · Late ${fmt.pctRaw(hb?.late)} · Missed ${fmt.pctRaw(hb?.missed)}</div>
+    <div class="hbar"><div style="width:${hb?.onTime||0}%;background:var(--green)"></div><div style="width:${hb?.late||0}%;background:var(--yellow)"></div><div style="width:${hb?.missed||0}%;background:var(--red)"></div></div>` +
+    (gr ? `<div style="font-size:12px;color:var(--text-muted);margin-top:8px">GM ${d.info.gm} — On-time ${fmt.pctRaw(gr.onTime)} · Late ${fmt.pctRaw(gr.late)} · Missed ${fmt.pctRaw(gr.missed)}</div>
+    <div class="hbar"><div style="width:${gr.onTime}%;background:var(--green)"></div><div style="width:${gr.late}%;background:var(--yellow)"></div><div style="width:${gr.missed}%;background:var(--red)"></div></div>` :
+    `<div class="nodata">GM-level routine data not matched for ${d.info.gm}.</div>`) + `</div></div>`;
+
+  // FSCC
+  h += `<div class="panel" style="margin:0"><div class="panel-h">Food Safety — Steritech FSCC ${fsccPill(s)}</div><div class="panel-b">`;
+  if(f && f.score != null){
+    h += `<div style="font-size:13px;margin-bottom:8px">${f.evalType} · ${f.evalDate} · Specialist: ${f.specialist||'—'} · Prev: ${f.prevScore??'—'} (${f.prevRating||'—'}) · Significant: ${f.sigCount??0} · Secondary: ${f.secCount??0} · <b class="${f.repeats>0?'r':'g'}">${f.repeats??0} repeats</b></div>`;
+    if(f.scoreHistory && f.scoreHistory.length){
+      const mx = Math.max(...f.scoreHistory.map(x=>x.s), 10);
+      h += `<div class="spark" style="margin:16px 0 6px">` + f.scoreHistory.map(x=>`<div style="height:${Math.max(3,x.s/mx*34)}px;background:var(--surface3)"><span>${x.s}</span></div>`).join('') + `</div><div style="font-size:9px;color:var(--text-dim)">${f.scoreHistory.map(x=>x.d).join(' · ')} (lower is better)</div>`;
+    }
+    if(f.bestPractices?.length) h += `<div style="font-size:12px;margin-top:10px" class="g">✓ ${f.bestPractices.join(' · ')}</div>`;
+    if(f.deviations?.length) h += `<div style="margin-top:8px">` + f.deviations.map(dv=>`<div class="dev"><span class="code">${dv.code}</span><span>${dv.text}</span>${dv.repeat?'<span class="rep">Repeat</span>':''}</div>`).join('') + `</div>`;
+  } else {
+    h += `<div class="nodata">No FSCC evaluation on file${['39376','39389','39381','39391','39383'].includes(s)?' — request latest from Steritech onbrand360 before the visit':''}.</div>`;
+  }
+  h += `</div></div>`;
+
+  // CORE
+  h += `<div class="panel" style="margin:0"><div class="panel-h">CORE Operations Visit ${corePill(s)}</div><div class="panel-b">`;
+  if(c && c.score != null){
+    h += `<div style="font-size:13px;margin-bottom:8px">${c.evalType} · ${c.evalDate} · Specialist: ${c.specialist||'—'} · Mgr on duty: ${c.manager||'—'} · Critical: ${c.critCount??0} · Major: ${c.majCount??0} · Minor: ${c.minCount??0}</div>`;
+    if(c.reeval) h += `<div style="font-size:13px;margin-bottom:8px" class="y">Re-eval ${c.reeval.date}: score ${c.reeval.score} (${c.reeval.rating}) · ${c.reeval.repeats} repeats</div>`;
+    if(c.bestPractices?.length) h += `<div style="font-size:12px" class="g">✓ ${c.bestPractices.join(' · ')}</div>`;
+    const devs = (c.reeval?.deviations?.length ? c.reeval.deviations : c.deviations) || [];
+    if(devs.length) h += `<div style="margin-top:8px">` + devs.map(dv=>`<div class="dev"><span class="code">${dv.code}</span><span class="pill ${dv.level==='Critical'?'r':dv.level==='Major'?'o':'m'}" style="align-self:center">${dv.level}</span><span>${dv.text}</span></div>`).join('') + `</div>`;
+  } else {
+    h += `<div class="nodata">No CORE evaluation on file${['39376','39389','39381','39391','39383','39522'].includes(s)?' — confirm whether a CORE visit has occurred':''}.</div>`;
+  }
+  h += `</div></div>`;
+
+  // Comments
+  h += `<div class="panel full" style="margin:0"><div class="panel-h">Recent Guest Comments <span class="m" style="font-weight:400">${d.commentCount} total · 4/13–7/11</span></div><div class="panel-b">`;
+  if(d.comments?.length){
+    h += d.comments.map(cm=>{
+      const stars = cm.rating!=null ? `<span class="stars">${'★'.repeat(cm.rating)}${'☆'.repeat(5-cm.rating)}</span>` : (cm.osat!=null?`<span class="m">OSAT ${cm.osat}/5</span>`:'');
+      return `<div class="cmt"><div class="meta"><span class="pill m">${cm.source}</span><span>${cm.date}</span>${stars}</div><div class="txt">${cm.text.replace(/</g,'&lt;')}</div></div>`;
+    }).join('');
+  } else h += `<div class="nodata">No comments in window.</div>`;
+  h += `</div></div>`;
+
+  h += `</div>`;
+  document.getElementById('dcontent').innerHTML = h;
+  document.getElementById('detail').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeStore(){ document.getElementById('detail').classList.remove('open'); document.body.style.overflow = ''; }
+document.getElementById('detail').addEventListener('click', e => { if(e.target.id==='detail') closeStore(); });
+document.addEventListener('keydown', e => { if(e.key==='Escape') closeStore(); });
+
+document.getElementById('buildStamp').textContent = 'Data as of Jul 11 2026 · P7W3';
+renderTabs(); renderView();
+</script>
+</body>
+</html>

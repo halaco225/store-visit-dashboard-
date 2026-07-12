@@ -108,7 +108,7 @@
 </div>
 <div class="tabs" id="tabs"></div>
 <div class="wrap" id="view"></div>
-<div class="footnote">Sources: P6-26 Final P&amp;L · Weekly Trending P7W3 · SMG (comments 4/13–7/11) · HutBot routines · Steritech FSCC (Cycle 1 2026, all 13 stores) · CORE evaluations (FL area) · Master Alignment P7 REV 07/09. CORE for the 6 GA stores not on file. Fairburn Rd &amp; Hwy 5 FSCC loaded from summary reports (standard-level detail only). Prepared for internal use.</div>
+<div class="footnote">Sources: P6-26 Final P&amp;L · Weekly Trending P7W3 · SMG (comments 4/13–7/11) · HutBot routines · Steritech FSCC &amp; CORE (Cycle 1 2026) · Master Alignment P7 REV 07/09. CORE on file for 12 of 13 stores (CrossRds 39376 pending). Fairburn Rd &amp; Hwy 5 FSCC loaded from summary reports (standard-level detail only). Prepared for internal use.</div>
 <div id="detail"><div class="dwrap" id="dcontent"></div></div>
 
 <script>
@@ -2924,7 +2924,18 @@ const coreData = {
     ],
     scoreHistory:[{d:'Feb 17',s:21,r:'Breakdown'},{d:'Apr 28',s:10,r:'Marginal'}],
   },
-  '39413': { evalDate:'N/A', evalType:'—', specialist:'—', manager:'—', score:null, prevScore:null, prevRating:null, rating:'No Eval on File', critCount:null, majCount:null, minCount:null, repeats:null, reeval:null, bestPractices:[], deviations:[], scoreHistory:[] },
+  '39413': {
+    evalDate:'Jun 9, 2026', evalType:'Evaluation', specialist:'Mariah Anderson', manager:'James Carnes',
+    score:5, prevScore:5, prevRating:'At Standard', rating:'At Standard', critCount:0, majCount:1, minCount:3, repeats:2,
+    bestPractices:['Dough properly proofed and tempered','Orders accurate to customer specs','Pizzas met quality standards'],
+    deviations:[
+      {code:'DR205',level:'Major',text:'REPEAT: Booth seats torn',repeat:true},
+      {code:'DR309',level:'Minor',text:'5 ceiling tiles with water stains throughout location',repeat:false},
+      {code:'RR301',level:'Minor',text:'Women\u2019s restroom wall chipping paint; men\u2019s restroom wall graffiti',repeat:false},
+      {code:'RR305',level:'Minor',text:'REPEAT: Strong unfavorable odor in men\u2019s restroom',repeat:true},
+      {code:'BOH.1',level:'Minor',text:'Reach-in cooler not operational (not scored) \u2014 walk-in used as temporary backup',repeat:false},
+    ],
+  },
   '39414': { evalDate:'N/A', evalType:'—', specialist:'—', manager:'—', score:null, prevScore:null, prevRating:null, rating:'No Eval on File', critCount:null, majCount:null, minCount:null, repeats:null, reeval:null, bestPractices:[], deviations:[], scoreHistory:[] },
   '39415': {
     evalDate:'Jan 14, 2026', evalType:'Evaluation', specialist:'Clayton Odom', manager:'Sarah Roberts',
@@ -2992,6 +3003,66 @@ const coreData = {
     ],
     scoreHistory:[{d:'Jan 14',s:4,r:'Marginal'}],
   },
+
+  '39389': {
+    evalDate:'May 20, 2026', evalType:'Evaluation', specialist:'Brandy Arlotta', manager:'Karla Moore',
+    score:8, prevScore:3, prevRating:'Marginal', rating:'Marginal', critCount:0, majCount:3, minCount:2, repeats:0,
+    bestPractices:['Wings and sides met quality standards','Pizzas met quality standards','Dough properly proofed and tempered'],
+    deviations:[
+      {code:'FQ101b*',level:'Major',text:'Stuffed crust cheese blowout larger than a quarter',repeat:false},
+      {code:'DR205',level:'Major',text:'Dining chair discolored',repeat:false},
+      {code:'EX201',level:'Major',text:'Building sign cracked (location responsible)',repeat:false},
+      {code:'DR305',level:'Minor',text:'4 dead bugs on window ledges at entrance',repeat:false},
+      {code:'GI308*',level:'Minor',text:'Shoes not slip-resistant',repeat:false},
+    ],
+  },
+  '39381': {
+    evalDate:'Jun 6, 2026', evalType:'Evaluation', specialist:'Damien Burr', manager:'Cheree Leddy',
+    score:6, prevScore:7, prevRating:'Marginal', rating:'Marginal', critCount:0, majCount:3, minCount:0, repeats:1,
+    bestPractices:['Pizzas met quality standards (ingredient distribution, crust, cut)','Orders accurate','Uniforms brand-approved'],
+    deviations:[
+      {code:'FQ203*',level:'Major',text:'Expired restaurant labels on hand-tossed & pan dough; opened oil missing labels (6 findings)',repeat:false},
+      {code:'FC201',level:'Major',text:'Menuboard panel light gap',repeat:false},
+      {code:'EX301',level:'Major',text:'REPEAT: Roof damaged paint \u2014 5 findings (location responsible)',repeat:true},
+    ],
+  },
+  '39391': {
+    evalDate:'Jun 14, 2026', evalType:'Evaluation', specialist:'Damien Burr', manager:'Steven Payton',
+    score:4, prevScore:4, prevRating:'At Standard', rating:'At Standard', critCount:0, majCount:1, minCount:2, repeats:1,
+    bestPractices:['Pizzas met quality standards','Orders accurate','Dough properly proofed'],
+    deviations:[
+      {code:'FQ203*',level:'Major',text:'REPEAT: Opened oil missing restaurant-placed labels (3 findings)',repeat:true},
+      {code:'DR311',level:'Minor',text:'Burned-out bulbs above menuboard',repeat:false},
+      {code:'GI308*',level:'Minor',text:'Team member wearing grey pants (unapproved uniform)',repeat:false},
+    ],
+  },
+  '39522': {
+    evalDate:'Jun 24, 2026', evalType:'Evaluation', specialist:'Damien Burr', manager:'Gary Burney',
+    score:9, prevScore:8, prevRating:'Marginal', rating:'Marginal', critCount:0, majCount:2, minCount:5, repeats:3,
+    bestPractices:['Wings and sides met quality standards','Dough properly proofed','Orders accurate'],
+    deviations:[
+      {code:'FQ203*',level:'Major',text:'REPEAT: Expired labels on pan & breadstick dough; opened oil missing labels (4 findings)',repeat:true},
+      {code:'RR203',level:'Major',text:'REPEAT: Restroom mirror smudged',repeat:true},
+      {code:'DR309',level:'Minor',text:'4 dining room ceiling tiles with dust build-up near front counter',repeat:false},
+      {code:'DR311',level:'Minor',text:'Light shield dusty above front counter',repeat:false},
+      {code:'EX305',level:'Minor',text:'Grease trails at front entrance sidewalk',repeat:false},
+      {code:'GI308*',level:'Minor',text:'REPEAT: Shoes without secure backs',repeat:true},
+      {code:'RR303',level:'Minor',text:'Restroom vent dust build-up',repeat:false},
+    ],
+  },
+  '39383': {
+    evalDate:'May 19, 2026', evalType:'Evaluation', specialist:'Damien Burr', manager:'Ronald George',
+    score:7, prevScore:7, prevRating:'Marginal', rating:'Marginal', critCount:0, majCount:2, minCount:3, repeats:2,
+    bestPractices:['Pizzas met quality standards','Dough properly proofed & labeled','Orders accurate'],
+    deviations:[
+      {code:'BOH.5',level:'Major',text:'REPEAT: Oven belt time out of range \u2014 6m 25s observed',repeat:true},
+      {code:'EX307',level:'Major',text:'17 parking space stripes excessively faded (location responsible)',repeat:false},
+      {code:'DR305',level:'Minor',text:'REPEAT: Front window fogging',repeat:true},
+      {code:'FQ311',level:'Minor',text:'Fryer oil excessively dark \u2014 grate not visible',repeat:false},
+      {code:'GI308*',level:'Minor',text:'Hat without Pizza Hut logo',repeat:false},
+    ],
+  },
+
 };
 const fsSystemic = [
   {code:'5.07', label:'Equipment debris / build-up', stores:['39412','39430','39416','39529','39522','39376','39389','39381','39391','39383','39413']},

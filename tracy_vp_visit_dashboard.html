@@ -108,7 +108,7 @@
 </div>
 <div class="tabs" id="tabs"></div>
 <div class="wrap" id="view"></div>
-<div class="footnote">Sources: P6-26 Final P&amp;L · Weekly Trending P7W3 · SMG (comments 4/13–7/11) · HutBot routines · Steritech FSCC · CORE evaluations · Master Alignment P7 REV 07/09. FSCC/CORE for GA stores pending except Ellenwood (FSCC 6/24). Prepared for internal use.</div>
+<div class="footnote">Sources: P6-26 Final P&amp;L · Weekly Trending P7W3 · SMG (comments 4/13–7/11) · HutBot routines · Steritech FSCC (Cycle 1 2026, all 13 stores) · CORE evaluations (FL area) · Master Alignment P7 REV 07/09. CORE for the 6 GA stores not on file. Fairburn Rd &amp; Hwy 5 FSCC loaded from summary reports (standard-level detail only). Prepared for internal use.</div>
 <div id="detail"><div class="dwrap" id="dcontent"></div></div>
 
 <script>
@@ -2710,7 +2710,21 @@ const fsData = {
       {code:'5.07',text:'Crusted food debris on equipment interior; grease/dust on fan guards',repeat:true},
     ],
   },
-  '39413': { evalDate:'N/A', evalType:'—', specialist:'—', score:null, prevScore:null, prevRating:null, rating:'No Eval on File', sigCount:null, secCount:null, repeats:null, scoreHistory:[], bestPractices:[], deviations:[] },
+  '39413': {
+    evalDate:'Jun 9, 2026', evalType:'Evaluation', specialist:'Mariah Anderson',
+    score:7, prevScore:7, prevRating:'At Standard', rating:'At Standard', sigCount:0, secCount:7, repeats:6,
+    scoreHistory:[{d:'Dec 12',s:9},{d:'Mar 12',s:8},{d:'Apr 16',s:7},{d:'Aug 20',s:7},{d:'Jun 9',s:7}],
+    bestPractices:['Foods properly date labeled','Team Members washing hands when required','Hair restraints worn properly'],
+    deviations:[
+      {code:'5.01',text:'Foil pasta containers not inverted (prep); pizza boxes under 6\u2033 off floor (cut table)',repeat:true},
+      {code:'5.02',text:'3 spatulas scratched/chipped at cut table',repeat:true},
+      {code:'5.07',text:'Walk-in cooler door soil build-up',repeat:true},
+      {code:'5.10',text:'Shelving soiled in prep, fryers, cut table, cook line & walk-in; freezer walls rusted',repeat:false},
+      {code:'6.03',text:'Gap under back door \u2014 pest entry point',repeat:false},
+      {code:'6.04',text:'Floors missing grout/loose (dish, receiving); walls cracked/damaged; hood chipped',repeat:true},
+      {code:'7.10',text:'Multi-surface disinfectant label no longer legible (dish area)',repeat:true},
+    ],
+  },
   '39414': { evalDate:'N/A', evalType:'—', specialist:'—', score:null, prevScore:null, prevRating:null, rating:'No Eval on File', sigCount:null, secCount:null, repeats:null, scoreHistory:[], bestPractices:[], deviations:[] },
   '39415': {
     evalDate:'Feb 19, 2026', evalType:'Re-Evaluation', specialist:'Clayton Odom',
@@ -2788,6 +2802,94 @@ const fsData = {
       {code:'5.10',text:'REPEAT: BOH walls/shelving grease & soil buildup (dish, prep)',repeat:true},
       {code:'5.11',text:'Light shield missing over food in walk-in freezer',repeat:false},
       {code:'7.14',text:'Drain covers missing — dish area (Imminent Health Hazard category)',repeat:false},
+    ],
+  },
+
+  '39376': {
+    evalDate:'Jun 14, 2026', evalType:'Re-Evaluation', specialist:'Brandy Arlotta',
+    score:16, prevScore:14, prevRating:'Underperforming', rating:'Underperforming', sigCount:2, secCount:14, repeats:12,
+    scoreHistory:[{d:'Apr 11',s:4},{d:'Nov 25',s:15},{d:'Jan 5',s:3},{d:'May 13',s:14},{d:'Jun 14',s:16}],
+    bestPractices:['Foods properly date labeled','Team Members washing hands when required','Hair restraints worn properly'],
+    deviations:[
+      {code:'2.03',text:'SIGNIFICANT: Cold TCS above 41\u00b0F \u2014 julienne ham & diced tomatoes at 47\u00b0F in maketable cold well',repeat:false},
+      {code:'4.01',text:'SIGNIFICANT: Expired TCS \u2014 diced tomatoes past mfr date; alfredo & bone-in wings past restaurant date',repeat:false},
+      {code:'1.03',text:'Sanitizer dispenser not stocked at cut-table hand sink',repeat:true},
+      {code:'2.02',text:'Reach-in freezer internal thermometer inaccurate (displayed -10\u00b0F, actual 10\u00b0F)',repeat:false},
+      {code:'5.01',text:'Case of dough uncovered in walk-in freezer',repeat:false},
+      {code:'5.02',text:'10 perforated pans heavy carbon build-up; in-use bowls not sanitized every 4 hrs',repeat:true},
+      {code:'5.03',text:'Fryer detergent stored on floor \u2014 chemical contamination risk (receiving)',repeat:false},
+      {code:'5.07',text:'Fryer exterior grease; maketable organic build-up',repeat:true},
+      {code:'5.08',text:'Quat sanitizer under 150 ppm at fryers',repeat:false},
+      {code:'5.09',text:'Wet mops not hung to dry',repeat:true},
+      {code:'5.10',text:'Shelving/floor grease & crusted debris \u2014 cut table, fryers, prep, walk-in cooler',repeat:true},
+      {code:'5.11',text:'Damaged light shield over wing saucing station',repeat:true},
+      {code:'6.01',text:'Weekly pest walks not on file for 30 days',repeat:true},
+      {code:'6.04',text:'Holes in BOH walls \u2014 dish area',repeat:true},
+      {code:'7.03',text:'Food safety training records not accessible (shift lead locked out of Hut Link)',repeat:false},
+      {code:'7.07',text:'4 gaskets torn or with organic build-up \u2014 reach-in freezer, maketable, walk-in cooler',repeat:true},
+    ],
+  },
+  '39389': {
+    evalDate:'May 20, 2026', evalType:'Evaluation', specialist:'Brandy Arlotta',
+    score:9, prevScore:6, prevRating:'At Standard', rating:'At Standard', sigCount:0, secCount:9, repeats:4,
+    scoreHistory:[{d:'Oct 8',s:11},{d:'Nov 12',s:6},{d:'Jan 25',s:5},{d:'Oct 20',s:6},{d:'May 20',s:9}],
+    bestPractices:['Foods properly date labeled','Team Members washing hands when required','Hair restraints worn properly'],
+    deviations:[
+      {code:'5.02',text:'2 cracked separators in clean dish storage',repeat:true},
+      {code:'5.06',text:'Quat under 150 ppm at 3-comp sink \u2014 hole in bulk sanitizer bag starving the dispenser',repeat:false},
+      {code:'5.07',text:'Oven dust & dried debris; maketable crusted; walk-in cooler door organic material',repeat:true},
+      {code:'5.08',text:'Sanitizer buckets under 150 ppm at fryers (x2); 0 ppm at maketable',repeat:false},
+      {code:'5.09',text:'Dustpans stored with excess soilage',repeat:false},
+      {code:'5.10',text:'Shelving grease \u2014 prep, fryers, cut table, walk-in; floors, ceiling & walls soiled',repeat:true},
+      {code:'6.02',text:'0 interior ceiling pest traps installed (minimum required not met)',repeat:true},
+      {code:'6.04',text:'Holes in walls \u2014 receiving area',repeat:false},
+      {code:'6.05',text:'10 dead flies at front counter',repeat:false},
+    ],
+  },
+  '39381': {
+    evalDate:'Jun 6, 2026', evalType:'Evaluation', specialist:'Damien Burr',
+    score:9, prevScore:9, prevRating:'At Standard', rating:'At Standard', sigCount:0, secCount:9, repeats:4,
+    scoreHistory:[{d:'Oct 20',s:9},{d:'Jun 6',s:9}],
+    bestPractices:[],
+    deviations:[
+      {code:'2.07',text:'Frozen foods not thawed correctly (summary report \u2014 item detail not on file)',repeat:false},
+      {code:'5.01',text:'Food/packaging storage & condition',repeat:false},
+      {code:'5.02',text:'Utensils/smallwares cleanliness & repair',repeat:true},
+      {code:'5.07',text:'Equipment debris & build-up',repeat:true},
+      {code:'5.09',text:'Cleaning supplies availability/cleanliness',repeat:false},
+      {code:'5.10',text:'BOH floors/walls/ceiling/shelving not clean',repeat:true},
+      {code:'6.03',text:'Pest harborage / points of entry',repeat:false},
+      {code:'6.04',text:'BOH surfaces not in good repair',repeat:true},
+      {code:'7.10',text:'Chemical labeling/storage',repeat:false},
+    ],
+  },
+  '39391': {
+    evalDate:'Jun 14, 2026', evalType:'Evaluation', specialist:'Damien Burr',
+    score:6, prevScore:4, prevRating:'At Standard', rating:'At Standard', sigCount:0, secCount:6, repeats:4,
+    scoreHistory:[{d:'Oct 27',s:4},{d:'Jun 14',s:6}],
+    bestPractices:[],
+    deviations:[
+      {code:'1.04',text:'Hand washing sink issue \u2014 scored as secondary (summary report; item detail not on file)',repeat:false},
+      {code:'5.02',text:'Utensils/smallwares cleanliness & repair',repeat:true},
+      {code:'5.07',text:'Equipment debris & build-up',repeat:false},
+      {code:'5.10',text:'BOH floors/walls/ceiling/shelving not clean',repeat:true},
+      {code:'6.04',text:'BOH surfaces not in good repair',repeat:true},
+      {code:'7.07',text:'Gaskets not clean / not in good repair',repeat:true},
+    ],
+  },
+  '39383': {
+    evalDate:'May 19, 2026', evalType:'Evaluation', specialist:'Damien Burr',
+    score:7, prevScore:5, prevRating:'At Standard', rating:'At Standard', sigCount:0, secCount:7, repeats:6,
+    scoreHistory:[{d:'Feb 7',s:3},{d:'Oct 21',s:7},{d:'Apr 21',s:9},{d:'Nov 13',s:5},{d:'May 19',s:7}],
+    bestPractices:['Foods properly date labeled','Team Members washing hands when required','Temperature logs properly used'],
+    deviations:[
+      {code:'5.01',text:'6-inch personal pan dough uncovered in walk-in freezer',repeat:false},
+      {code:'5.02',text:'Bulk bins dirty; 6 pans carbon build-up; 14 pizza pans wet-nested',repeat:true},
+      {code:'5.07',text:'Oven, fryer, maketable, walk-in & dish machine build-up; 3-comp sink grease',repeat:true},
+      {code:'5.10',text:'Hood grease (fryers/prep/dry storage); shelving, walls & walk-in floors soiled',repeat:true},
+      {code:'6.03',text:'Landscaping touching building; grease barrel & dumpster dirty, lid left open',repeat:true},
+      {code:'6.04',text:'Floors chipped / missing grout (cook line, fryers, receiving, dish); walls loose/holes',repeat:true},
+      {code:'7.07',text:'Maketable & walk-in cooler gaskets with organic build-up',repeat:true},
     ],
   },
 
@@ -2892,11 +2994,12 @@ const coreData = {
   },
 };
 const fsSystemic = [
-  {code:'5.01', label:'Food under dripping condensation', stores:['39412','39430','39415','42659','39416']},
-  {code:'5.02', label:'Chipped/dirty utensils', stores:['39412','39430','39529']},
-  {code:'5.07', label:'Equipment debris/fan guards dirty', stores:['39412','39430','39416','39529']},
-  {code:'2.04/07', label:'Hot holding & thaw temps', stores:['39430','39529']},
-  {code:'1.03', label:'Hand sink not stocked', stores:['39412','42659']},
+  {code:'5.07', label:'Equipment debris / build-up', stores:['39412','39430','39416','39529','39522','39376','39389','39381','39391','39383','39413']},
+  {code:'5.10', label:'BOH surfaces not clean', stores:['39376','39389','39381','39391','39383','39413','39522']},
+  {code:'5.02', label:'Utensils chipped / carbon build-up / dirty', stores:['39412','39430','39529','39376','39389','39381','39391','39383','39413']},
+  {code:'5.01', label:'Improper food storage / uncovered product', stores:['39412','39430','39415','42659','39416','39522','39376','39381','39383','39413']},
+  {code:'6.04', label:'BOH floors/walls not in good repair', stores:['39376','39389','39381','39391','39383','39413']},
+  {code:'5.08', label:'Sanitizer below concentration (some 0 ppm)', stores:['39522','39376','39389']},
 ];
 
 const DAYS = [
@@ -2973,7 +3076,7 @@ function renderOverview(){
       cautions.map(s=>`<b>${DATA[s].itin.label} ${s}</b> (${DATA[s].trend.dm}) — sales ${fmt.gr(DATA[s].trend.salesGrowth[3])}, transactions ${fmt.gr(DATA[s].trend.txnGrowth[3])} latest week`).join(' &nbsp;·&nbsp; ') + `</div></div>`;
   }
 
-  h += `<div class="panel"><div class="panel-h">Systemic FSCC Patterns — Florida Area (multi-store repeats)</div><div class="panel-b">` +
+  h += `<div class="panel"><div class="panel-h">Systemic FSCC Patterns — Across All 13 Stores (Cycle 1 2026)</div><div class="panel-b">` +
     fsSystemic.map(p=>`<div class="dev"><span class="code">${p.code}</span><span>${p.label}</span><span class="m">${p.stores.length} stores: ${p.stores.join(', ')}</span></div>`).join('') + `</div></div>`;
 
   h += `<div class="panel"><div class="panel-h">Visit Roster — All 13 Stores</div><div class="panel-b" style="overflow-x:auto">
